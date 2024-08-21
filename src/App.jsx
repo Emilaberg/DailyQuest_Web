@@ -6,11 +6,9 @@ function App() {
 
   return (
     <>
-      <div className="box">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
+      <h1 className="text-3xl font-bold underline text-lavender">
+        Hello world!
+      </h1>
     </>
   );
 }
