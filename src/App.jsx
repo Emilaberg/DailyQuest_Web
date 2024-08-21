@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-lavender">
-        Hello world!
-      </h1>
+      <Router>
+        <Routes>
+          <Route>Exempel #1</Route>
+          <Route>Exempel #2</Route>
+          <Route>Exempel #3</Route>
+        </Routes>
+      </Router>
     </>
   );
 }
