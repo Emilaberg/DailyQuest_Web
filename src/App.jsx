@@ -1,15 +1,32 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./App.css";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route>Exempel #1</Route>
-          <Route>Exempel #2</Route>
-          <Route>Exempel #3</Route>
+          <Route
+            exact
+            path="/"
+            element={<HomePage />}
+          ></Route>
+          {/* <Route
+            path="/games"
+            element={<GamePage />}
+          ></Route>
+          <Route
+            path="/admin"
+            element={<AdminPage />}
+          ></Route> */}
+
+          {/* LÄNGST NER */}
+          {/* <Route
+            path="*"
+            element={<ErrorPage />}
+          ></Route> */}
         </Routes>
       </Router>
     </>
