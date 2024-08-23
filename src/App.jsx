@@ -1,16 +1,34 @@
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./App.css";
+import HomePage from "./pages/HomePage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div className="box">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<HomePage />}
+          ></Route>
+          {/* <Route
+            path="/games"
+            element={<GamePage />}
+          ></Route>
+          <Route
+            path="/admin"
+            element={<AdminPage />}
+          ></Route> */}
+
+          {/* LÄNGST NER */}
+          {/* <Route
+            path="*"
+            element={<ErrorPage />}
+          ></Route> */}
+        </Routes>
+      </Router>
     </>
   );
 }

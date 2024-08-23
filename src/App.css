@@ -1,9 +1,6 @@
 #root {
-  height: 100vh;
-  background-color: rgb(42, 42, 42);
+  background-color: #05050a;
 }
-
-.box {
-  text-align: center;
-  background-color: aliceblue;
+body {
+  background-color: #05050a;
 }
