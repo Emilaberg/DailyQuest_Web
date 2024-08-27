@@ -1,7 +1,7 @@
 function HomePage() {
   return (
     <>
-      <div className="min-h-screen">
+      <div>
         <h1 className="text-white">HOMEPAGE</h1>
       </div>
     </>
