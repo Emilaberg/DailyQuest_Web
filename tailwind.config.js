@@ -7,6 +7,9 @@ export default {
       fontFamily: {
         sans: ['"inter"', ...defaultTheme.fontFamily.sans],
       },
+      transitionProperty: {
+        width: "width",
+      },
       colors: {
         midnightBlue: "#05050A",
         slateBlue: "#1F2B35",
