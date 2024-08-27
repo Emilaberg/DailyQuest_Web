@@ -12,6 +12,7 @@ export default {
       },
       colors: {
         midnightBlue: "#05050A",
+        midnightBlue_V2: "#0C101F",
         slateBlue: "#1F2B35",
         lightSlateGray: "#D9D9D9",
         adminLightSlateGray: "#BABBBB",
