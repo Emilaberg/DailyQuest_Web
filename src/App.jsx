@@ -6,6 +6,7 @@ import GamePage from "./pages/GamePage";
 import AdminPage from "./pages/AdminPage";
 import ErrorPage from "./pages/ErrorPage";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             element={<ErrorPage />}
           ></Route>
         </Routes>
+        <Footer />
       </Router>
     </>
   );
