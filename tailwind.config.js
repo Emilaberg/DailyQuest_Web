@@ -7,9 +7,11 @@ export default {
       fontFamily: {
         sans: ['"inter"', ...defaultTheme.fontFamily.sans],
       },
-      transitionProperty: {
-        width: "width",
-      },
+      backgroundImage: (theme) => ({
+        "gradient-primaryBlue": `linear-gradient(to right, ${theme(
+          "colors.hotPink"
+        )}, ${theme("colors.oceanBlue")})`,
+      }),
       colors: {
         midnightBlue: "#05050A",
         midnightBlue_V2: "#0C101F",
