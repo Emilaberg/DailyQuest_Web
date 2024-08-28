@@ -4,17 +4,14 @@ import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import AdminPage from "./pages/AdminPage";
 import ErrorPage from "./pages/ErrorPage";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { useState } from "react";
-import AdminNavbar from "./components/adminNavbar";
+
 function App() {
   const [isAdminPage, setIsAdminPage] = useState(false);
   return (
     <>
       <Router>
-        {isAdminPage ? <AdminNavbar /> : <Navbar />}
-
         <Routes>
           <Route
             exact
