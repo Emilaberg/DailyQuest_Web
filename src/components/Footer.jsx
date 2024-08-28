@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="absolute flex items-center justify-center md:justify-between bottom-0 py-3 w-full h-60 bg-gradient-to-r from-[#0C101F] from-0% to-[#980CDA] to-100% ">
+    <footer className="relatiflex items-center justify-center md:justify-between bottom-0 py-3 w-full h-60 bg-gradient-to-r from-[#0C101F] from-0% to-[#980CDA] to-100% ">
       <img
         className="md:h-40 max-md:hidden lg:h-full"
         src="src\assets\images\Left-image.svg"
