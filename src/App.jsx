@@ -6,12 +6,15 @@ import AdminPage from "./pages/AdminPage";
 import ErrorPage from "./pages/ErrorPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
+import { useState } from "react";
+import AdminNavbar from "./components/adminNavbar";
 function App() {
+  const [isAdminPage, setIsAdminPage] = useState(false);
   return (
     <>
       <Router>
-        <Navbar />
+        {isAdminPage ? <AdminNavbar /> : <Navbar />}
+
         <Routes>
           <Route
             exact
@@ -24,7 +27,12 @@ function App() {
           ></Route>
           <Route
             path="/admin"
-            element={<AdminPage />}
+            element={
+              <AdminPage
+                isAdmin={isAdminPage}
+                setIsAdmin={setIsAdminPage}
+              />
+            }
           ></Route>
 
           {/* LÄNGST NER */}
