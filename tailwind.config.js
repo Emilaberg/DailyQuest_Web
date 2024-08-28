@@ -31,6 +31,11 @@ export default {
         charcoalBlack: "#0E0E0F",
         primaryblue: "#145CA6",
       },
+      backgroundImage: (theme) => ({
+        "gradient-primary": `linear-gradient(to top, ${theme(
+          "colors.darkLavander"
+        )}, ${theme("colors.lavender")})`,
+      }),
     },
   },
   plugins: [],
