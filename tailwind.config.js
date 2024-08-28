@@ -21,6 +21,11 @@ export default {
         charcoalBlack: "#0E0E0F",
         primaryblue: "#145CA6",
       },
+      backgroundImage: (theme) => ({
+        "gradient-border": `linear-gradient(to right, ${theme(
+          "colors.teal"
+        )}, ${theme("colors.hotPink")})`,
+      }),
     },
   },
   plugins: [],
