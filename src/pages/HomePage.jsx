@@ -1,11 +1,15 @@
 import Welcome from "../components/Welcome";
+import TodaysQuest from "../components/Todaysquest";
 
 function HomePage() {
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen">
+      <section className="flex items-center justify-center min-h-screen">
         <Welcome />
-      </div>
+      </section>
+      <section className="flex items-center justify-center ">
+        <TodaysQuest />
+      </section>
     </>
   );
 }
