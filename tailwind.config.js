@@ -1,10 +1,20 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"inter"', ...defaultTheme.fontFamily.sans],
+      },
+      backgroundImage: (theme) => ({
+        "gradient-primaryBlue": `linear-gradient(to right, ${theme(
+          "colors.hotPink"
+        )}, ${theme("colors.oceanBlue")})`,
+      }),
       colors: {
         midnightBlue: "#05050A",
+        midnightBlue_V2: "#0C101F",
         slateBlue: "#1F2B35",
         lightSlateGray: "#D9D9D9",
         adminLightSlateGray: "#BABBBB",
@@ -22,6 +32,9 @@ export default {
         primaryblue: "#145CA6",
       },
       backgroundImage: (theme) => ({
+        "gradient-border": `linear-gradient(to right, ${theme(
+          "colors.teal"
+        )}, ${theme("colors.hotPink")})`,
         "gradient-primary": `linear-gradient(to top, ${theme(
           "colors.darkLavander"
         )}, ${theme("colors.lavender")})`,

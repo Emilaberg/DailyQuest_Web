@@ -11,7 +11,6 @@ function AdminPage() {
         </div>
         <div className="flex h-screen">
           <SideBar />
-
           {/* Main Content Holders */}
           <div className="w-9/12">
             <TrackedEmails />
