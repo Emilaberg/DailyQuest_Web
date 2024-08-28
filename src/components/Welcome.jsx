@@ -1,7 +1,7 @@
 function Welcome() {
   return (
     <>
-      <div className="w-2/5 min-h-screen min-w-full p-6 flex flex-col justify-center items-center">
+      <div className="p-6 flex flex-col justify-center items-center">
         <h1 className="text-center text-white text-6xl font-bold rotate-[-20deg] mb-20 opacity-85">
           Welcome to DailyQuest
         </h1>
