@@ -32,6 +32,9 @@ export default {
         primaryblue: "#145CA6",
       },
       backgroundImage: (theme) => ({
+        "gradient-border": `linear-gradient(to right, ${theme(
+          "colors.teal"
+        )}, ${theme("colors.hotPink")})`,
         "gradient-primary": `linear-gradient(to top, ${theme(
           "colors.darkLavander"
         )}, ${theme("colors.lavender")})`,
