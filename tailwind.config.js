@@ -1,11 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
+import textShadow from "tailwindcss-textshadow";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
         sans: ['"inter"', ...defaultTheme.fontFamily.sans],
+      },
+      textShadow: {
+        "2xl": "5px 5px 10px rgba(0, 0, 0, 0.75)", // Even larger shadow
+        "3xl": "7px 7px 15px rgba(0, 0, 0, 0.75)", // More pronounced shadow
+        "4xl": "10px 10px 20px rgba(0, 0, 0, 0.85)", // Extreme shadow
       },
       backgroundImage: (theme) => ({
         "gradient-primaryBlue": `linear-gradient(to right, ${theme(
@@ -41,5 +47,5 @@ export default {
       }),
     },
   },
-  plugins: [],
+  plugins: [textShadow],
 };
