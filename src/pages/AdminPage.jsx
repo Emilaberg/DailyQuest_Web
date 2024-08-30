@@ -1,14 +1,23 @@
 import SideBar from "../components/SideBar.jsx";
 import TrackedEmails from "../components/TrackedEmails.jsx";
 import AvailableQuizzes from "../components/AvailableQuizzes.jsx";
+import { redirect, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import AdminNavbar from "../components/adminNavbar.jsx";
+function AdminPage({ isAdmin, setIsAdmin }) {
+  const location = useLocation();
 
-function AdminPage() {
+  useEffect(() => {
+    console.log("Location changed");
+    if (location.pathname == "/admin") {
+      setIsAdmin(true);
+    } else {
+    }
+  }, [location]);
   return (
     <>
+      <AdminNavbar />
       <div>
-        <div className=" min-h-20">
-          <h1 className="text-white">ADMINPAGE</h1>
-        </div>
         <div className="flex h-screen">
           <SideBar />
           {/* Main Content Holders */}

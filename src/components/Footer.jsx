@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <footer className="relative flex items-center justify-center md:justify-between bottom-0 py-3 w-full h-60 bg-gradient-to-r from-[#0C101F] from-0% to-[#980CDA] to-100% ">
@@ -21,11 +23,13 @@ function Footer() {
           <div>DailyQuest @ 2024</div>
           <div className="flex justify-center font-light">
             <span>admin</span>
-            <img
-              className="ml-2"
-              src="src\assets\icons\admin_login.svg"
-              alt=""
-            />
+            <Link to="admin">
+              <img
+                className="ml-2"
+                src="src\assets\icons\admin_login.svg"
+                alt=""
+              />
+            </Link>
           </div>
         </div>
       </div>
