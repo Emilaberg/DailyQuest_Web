@@ -3,7 +3,7 @@ function TodaysQuest() {
     <>
       <div className="w-full mr-5 ml-5 ">
         <div className="flex justify-center md:justify-start md:ml-3 lg:justify-start">
-          <h1 className="text-white text-2xl uppercase font-bold mb-2 tracking-wider md:text-2xl lg:text-3xl ">
+          <h1 className="text-white text-2xl uppercase font-bold mb-2 tracking-wider lg:text-3xl ">
             Todays quest
           </h1>
         </div>

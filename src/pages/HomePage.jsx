@@ -1,6 +1,7 @@
 import Welcome from "../components/Welcome";
 import TodaysQuest from "../components/Todaysquest";
 import BrowseAll from "../components/BrowseAll";
+import GameCard from "../components/GameCard";
 function HomePage() {
   return (
     <>
