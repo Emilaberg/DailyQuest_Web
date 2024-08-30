@@ -1,6 +1,6 @@
 import Welcome from "../components/Welcome";
 import TodaysQuest from "../components/Todaysquest";
-
+import BrowseAll from "../components/BrowseAll";
 function HomePage() {
   return (
     <>
@@ -10,6 +10,9 @@ function HomePage() {
         </section>
         <section className="flex items-center justify-center ">
           <TodaysQuest />
+        </section>
+        <section>
+          <BrowseAll />
         </section>
       </div>
     </>
