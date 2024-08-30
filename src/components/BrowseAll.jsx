@@ -25,7 +25,7 @@ function BrowseAll() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 md:grid md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-6 md:grid md:grid-cols-3">
           <GameCard
             imageUrl={"src/assets/images/cards/wow.png"}
             gameName={"World of Warcraft"}

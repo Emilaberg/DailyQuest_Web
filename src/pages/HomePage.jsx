@@ -1,7 +1,7 @@
 import Welcome from "../components/Welcome";
 import TodaysQuest from "../components/Todaysquest";
 import BrowseAll from "../components/BrowseAll";
-import GameCard from "../components/GameCard";
+import HelpingHand from "../components/HelpingHand";
 function HomePage() {
   return (
     <>
@@ -14,6 +14,9 @@ function HomePage() {
         </section>
         <section>
           <BrowseAll />
+        </section>
+        <section>
+          <HelpingHand />
         </section>
       </div>
     </>

@@ -36,6 +36,7 @@ export default {
         darkLavander: "#493D99",
         charcoalBlack: "#0E0E0F",
         primaryblue: "#145CA6",
+        hoverBlueHelp: "#122E57",
       },
       backgroundImage: (theme) => ({
         "gradient-border": `linear-gradient(to right, ${theme(
