@@ -1,11 +1,16 @@
 import Welcome from "../components/Welcome";
-
+import TodaysQuest from "../components/Todaysquest";
+import Navbar from "../components/Navbar";
 function HomePage() {
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen">
+      <Navbar />
+      <section className="flex items-center justify-center min-h-screen">
         <Welcome />
-      </div>
+      </section>
+      <section className="flex items-center justify-center ">
+        <TodaysQuest />
+      </section>
     </>
   );
 }
