@@ -19,6 +19,7 @@ function HomePage() {
           <HelpingHand />
         </section>
       </div>
+
     </>
   );
 }

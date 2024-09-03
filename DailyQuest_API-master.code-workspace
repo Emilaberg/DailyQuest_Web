@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"path": "../DailyQuest_API-master"
+	},
+	{
+		"path": "."
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "DailyQuest_Web"
+  }
+}
