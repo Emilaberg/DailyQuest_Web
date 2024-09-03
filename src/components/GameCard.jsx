@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-const game = "world-of-warcraft";
+
 function GameCard({ imageUrl, gameName }) {
+  const game = "world-of-warcraft";
   return (
     <>
       <Link

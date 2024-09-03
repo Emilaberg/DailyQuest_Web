@@ -1,13 +1,14 @@
-// Original
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import AdminPage from "./pages/AdminPage";
 import ErrorPage from "./pages/ErrorPage";
-import { useState } from "react";
+import Footer from "./components/Footer";
+import AdminLoginOverlay from "./components/AdminLoginOverlay";
 import Layout from "./pages/Layout";
+
+import { useState } from "react";
 import { useEffect } from "react";
 
 function useScrollToTop() {
@@ -23,21 +24,18 @@ function App() {
 
   const [isAdminPage, setIsAdminPage] = useState(false);
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/games/:game" element={<GamePage />} />
-          <Route
-            path="/admin"
-            element={
-              <AdminPage isAdmin={isAdminPage} setIsAdmin={setIsAdminPage} />
-            }
-          />
-          <Route path="*" element={<ErrorPage />} />
-        </Route>
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />}/>
+              <Route path="/games/:game" element={<GamePage />}/>
+              <Route path="/admin/login" element={<AdminLoginOverlay />}/>
+              <Route path="*" element={<ErrorPage />}/>
+          </Route>
+        </Routes>
+      </Router>
+    </>
   );
 }
 

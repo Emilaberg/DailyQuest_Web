@@ -5,7 +5,6 @@ import ApiService from "../hooks/apiService";
 import { useEffect, useState } from "react";
 import BrowseAll from "../components/BrowseAll";
 import HelpingHand from "../components/HelpingHand";
-import Footer from "../components/Footer";
 
 function HomePage() {
   const apiService = ApiService();
@@ -21,17 +20,21 @@ function HomePage() {
 
   return (
     <>
-      <div className="bg-[url(src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
-        <section className="flex items-center justify-center min-h-screen">
+      <Navbar />
+      <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+        <section className="flex items-center justify-center min-h-screen ">
           <Welcome />
         </section>
-        <section className="flex items-center justify-center">
+        <section className="flex items-center justify-center lg:-mt-52 lg:mb-72 lg:mx-52">
           <TodaysQuest />
         </section>
-        <section className="flex items-center justify-center">
+        <section
+          id="games"
+          className="lg:my-72 lg:mx-72"
+        >
           <BrowseAll />
         </section>
-        <section className="flex items-center justify-center">
+        <section className="flex items-center justify-center lg:my-72 lg:mx-52">
           <HelpingHand />
         </section>
       </div>

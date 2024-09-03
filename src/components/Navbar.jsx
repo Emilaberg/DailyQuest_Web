@@ -1,7 +1,8 @@
 import { useState } from "react";
 import NavLinks from "./NavLinks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Navbar() {
+  const Navigate = useNavigate();
   const [hamburgerClick, setHamburgerClick] = useState(false);
 
   return (
@@ -19,7 +20,7 @@ function Navbar() {
 
         <div className="md:hidden">
           <img
-            src="src\assets\icons\hamburger_menu.svg"
+            src="..\src\assets\icons\hamburger_menu.svg"
             alt="hamburger menu"
             onClick={() => setHamburgerClick(!hamburgerClick)}
           />
@@ -36,7 +37,11 @@ function Navbar() {
               e.stopPropagation();
             }}
           >
-            <img className="w-3/4" src="src\assets\icons\Webicon.svg" alt="" />
+            <img
+              className="w-3/4"
+              src="..\src\assets\icons\Webicon.svg"
+              alt=""
+            />
             <hr />
             <div className="capitalize text-adminLightSlateGray flex flex-col pt-5 gap-5 font-bold text-xl">
               <Link className="flex" to="/">
@@ -50,7 +55,7 @@ function Navbar() {
               <Link className="flex" to="/games">
                 <img
                   className="w-[24px] mr-3"
-                  src="src\assets\icons\questionmark.svg"
+                  src="..\src\assets\icons\questionmark.svg"
                   alt=""
                 />{" "}
                 Today's Quiz
@@ -58,7 +63,7 @@ function Navbar() {
               <Link className="flex" to="/">
                 <img
                   className="w-[24px] mr-3"
-                  src="src\assets\icons\mail.svg"
+                  src="..\src\assets\icons\mail.svg"
                   alt=""
                 />{" "}
                 About us

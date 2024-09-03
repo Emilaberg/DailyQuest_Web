@@ -1,6 +1,7 @@
 function TodaysQuest() {
   return (
     <>
+
       <div className="w-3/4 mr-5 ml-5">
         <div className="flex justify-center md:justify-start md:ml-3 lg:justify-start">
           <h1 className="text-white text-2xl uppercase font-bold mb-2 tracking-wider lg:text-3xl ">
