@@ -7,13 +7,10 @@ function Navbar() {
   return (
     <>
       <nav className="w-full h-28 bg-[#22195E] flex items-center justify-between pr-[81px] pl-[26px]">
-        <Link
-          className="mr-auto"
-          to=""
-        >
+        <Link className="mr-auto" to="/">
           <img
             className="w-56 lg:w-72 xl:w-full"
-            src="src\assets\icons\Webicon.svg"
+            src="../src/assets/icons/Webicon.svg"
             alt="webicon"
           />
         </Link>
@@ -39,45 +36,32 @@ function Navbar() {
               e.stopPropagation();
             }}
           >
-            <img
-              className="w-3/4"
-              src="src\assets\icons\Webicon.svg"
-              alt=""
-            />
+            <img className="w-3/4" src="src\assets\icons\Webicon.svg" alt="" />
             <hr />
             <div className="capitalize text-adminLightSlateGray flex flex-col pt-5 gap-5 font-bold text-xl">
-              <Link
-                className="flex"
-                to="/"
-              >
+              <Link className="flex" to="/">
                 <img
                   className="w-[24px] mr-3"
                   src="src\assets\icons\bug.svg"
                   alt=""
                 />{" "}
-                Report a Bug
+                Games
               </Link>
-              <Link
-                className="flex"
-                to="/games"
-              >
+              <Link className="flex" to="/games">
                 <img
                   className="w-[24px] mr-3"
                   src="src\assets\icons\questionmark.svg"
                   alt=""
                 />{" "}
-                I Need help
+                Today's Quiz
               </Link>
-              <Link
-                className="flex"
-                to="/"
-              >
+              <Link className="flex" to="/">
                 <img
                   className="w-[24px] mr-3"
                   src="src\assets\icons\mail.svg"
                   alt=""
                 />{" "}
-                Send a ticket
+                About us
               </Link>
             </div>
             <div className="mt-auto text-adminLightSlateGray text-center">

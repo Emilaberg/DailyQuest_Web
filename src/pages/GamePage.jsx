@@ -1,14 +1,17 @@
-
 import QuizComponent from "../components/QuizComponent";
-import Navbar from "../components/Navbar";
+import { useEffect } from "react";
 
+// function useScrollToTop() {
+//   useEffect(() => {
+//     window.scrollTo(0, 0);
+//   }, []);
+// }
 
 function GamePage() {
+  // useScrollToTop();
   return (
     <>
-      <Navbar />
       <div className="min-h-screen">
-        <h1 className="text-white">GAMEPAGE</h1>
         <QuizComponent />
       </div>
     </>

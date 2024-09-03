@@ -8,7 +8,7 @@ function TodaysQuest() {
           </h1>
         </div>
         <div className="flex w-full h-56 items-center justify-center bg-gradient-border px-4 py-4 rounded-[27px] mb-24 md:h-96 xl:h-[520px]">
-          <div className="relative w-full h-full bg-center bg-no-repeat bg-cover rounded-[13.5px]  bg-[url('src/assets/images/cards/the_legend_of_zelda_breath_of_the_wild_4k-wide-1332745958.jpg')] ">
+          <div className="relative w-full h-full bg-center bg-no-repeat bg-cover rounded-[13.5px]  bg-[url('../src/assets/images/cards/the_legend_of_zelda_breath_of_the_wild_4k-wide-1332745958.jpg')] ">
             <div className=" absolute w-full h-full bg-black rounded-[13.5px] opacity-50"></div>
             <div className="absolute justify-between flex w-full h-full items-center px-5">
               <img
