@@ -1,11 +1,31 @@
+import { useEffect, useState } from "react";
+import ApiService from "../hooks/apiService";
+import { useLocation } from "react-router-dom";
+
 function QuizComponent() {
+  const apiService = ApiService();
+  const [quiz, setQuiz] = useState([]);
+  const [questions, setQuestion] = useState([]);
+  //get state from route
+  let { state } = useLocation();
+
+  useEffect(() => {
+    async function fetchData() {
+      var res = await apiService.getQuizbyId(state.quizId);
+      console.log(res);
+      setQuiz(res);
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center">
       {/* quiz container */}
       <div className="relative w-full px-5 md:w-4/6 lg:w-3/5 xl:w-1/2 md:px-0 mt-20">
         <img
           className="w-full"
-          src="src\assets\images\zeldaChillin.png"
+          src="../src/assets/images/zeldaChillin.png"
           alt=""
         />
         {/* buttons container */}

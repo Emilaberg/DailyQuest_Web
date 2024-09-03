@@ -5,7 +5,7 @@ function Footer() {
     <footer className="relative flex items-center justify-center md:justify-between bottom-0 py-3 w-full h-60 bg-gradient-to-r from-[#0C101F] from-0% to-[#980CDA] to-100% ">
       <img
         className="md:h-40 max-md:hidden lg:h-full"
-        src="src\assets\images\Left-image.svg"
+        src="..\src\assets\images\Left-image.svg"
         alt=""
       />
       {/* center content */}
@@ -26,7 +26,7 @@ function Footer() {
             <Link to="admin">
               <img
                 className="ml-2"
-                src="src\assets\icons\admin_login.svg"
+                src="..\src\assets\icons\admin_login.svg"
                 alt=""
               />
             </Link>
@@ -35,7 +35,7 @@ function Footer() {
       </div>
       <img
         className="md:h-40 max-md:hidden lg:h-full"
-        src="src\assets\images\Right-image.svg"
+        src="..\src\assets\images\Right-image.svg"
         alt=""
       />
     </footer>

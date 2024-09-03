@@ -21,7 +21,7 @@ function HomePage() {
   return (
     <>
       <Navbar />
-      <div className="bg-[url(src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+      <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
         <section className="flex items-center justify-center min-h-screen">
           <Welcome />
         </section>

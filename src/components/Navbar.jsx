@@ -1,7 +1,8 @@
 import { useState } from "react";
 import NavLinks from "./NavLinks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Navbar() {
+  const Navigate = useNavigate();
   const [hamburgerClick, setHamburgerClick] = useState(false);
 
   return (
@@ -9,11 +10,11 @@ function Navbar() {
       <nav className="w-full h-28 bg-[#22195E] flex items-center justify-between pr-[81px] pl-[26px]">
         <Link
           className="mr-auto"
-          to=""
+          to="/"
         >
           <img
             className="w-56 lg:w-72 xl:w-full"
-            src="src\assets\icons\Webicon.svg"
+            src="..\src\assets\icons\Webicon.svg"
             alt="webicon"
           />
         </Link>
@@ -22,7 +23,7 @@ function Navbar() {
 
         <div className="md:hidden">
           <img
-            src="src\assets\icons\hamburger_menu.svg"
+            src="..\src\assets\icons\hamburger_menu.svg"
             alt="hamburger menu"
             onClick={() => setHamburgerClick(!hamburgerClick)}
           />
@@ -41,7 +42,7 @@ function Navbar() {
           >
             <img
               className="w-3/4"
-              src="src\assets\icons\Webicon.svg"
+              src="..\src\assets\icons\Webicon.svg"
               alt=""
             />
             <hr />
@@ -63,7 +64,7 @@ function Navbar() {
               >
                 <img
                   className="w-[24px] mr-3"
-                  src="src\assets\icons\questionmark.svg"
+                  src="..\src\assets\icons\questionmark.svg"
                   alt=""
                 />{" "}
                 I Need help
@@ -74,7 +75,7 @@ function Navbar() {
               >
                 <img
                   className="w-[24px] mr-3"
-                  src="src\assets\icons\mail.svg"
+                  src="..\src\assets\icons\mail.svg"
                   alt=""
                 />{" "}
                 Send a ticket

@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  ScrollRestoration,
+} from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
@@ -19,7 +24,7 @@ function App() {
             element={<HomePage />}
           ></Route>
           <Route
-            path="/games"
+            path="/games/:game"
             element={<GamePage />}
           ></Route>
           <Route
