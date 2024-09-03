@@ -21,17 +21,20 @@ function HomePage() {
   return (
     <>
       <Navbar />
-      <div className="bg-[url(src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
-        <section className="flex items-center justify-center min-h-screen">
+      <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+        <section className="flex items-center justify-center min-h-screen ">
           <Welcome />
         </section>
-        <section className="flex items-center justify-center ">
+        <section className="flex items-center justify-center lg:-mt-52 lg:mb-72 lg:mx-52">
           <TodaysQuest />
         </section>
-        <section>
+        <section
+          id="games"
+          className="lg:my-72 lg:mx-72"
+        >
           <BrowseAll />
         </section>
-        <section className="flex items-center justify-center">
+        <section className="flex items-center justify-center lg:my-72 lg:mx-52">
           <HelpingHand />
         </section>
       </div>
