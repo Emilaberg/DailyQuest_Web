@@ -1,7 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function GameCard({ imageUrl, gameName }) {
-  const Navigate = useNavigate();
   const game = "world-of-warcraft";
   return (
     <>
