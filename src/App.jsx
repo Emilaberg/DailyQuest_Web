@@ -4,14 +4,14 @@ import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import AdminPage from "./pages/AdminPage";
 import ErrorPage from "./pages/ErrorPage";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { useState } from "react";
 
 function App() {
+  const [isAdminPage, setIsAdminPage] = useState(false);
   return (
     <>
       <Router>
-        <Navbar />
         <Routes>
           <Route
             exact
@@ -24,7 +24,12 @@ function App() {
           ></Route>
           <Route
             path="/admin"
-            element={<AdminPage />}
+            element={
+              <AdminPage
+                isAdmin={isAdminPage}
+                setIsAdmin={setIsAdminPage}
+              />
+            }
           ></Route>
 
           {/* LÄNGST NER */}
