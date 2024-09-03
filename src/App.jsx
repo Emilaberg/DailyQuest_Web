@@ -10,6 +10,7 @@ import GamePage from "./pages/GamePage";
 import AdminPage from "./pages/AdminPage";
 import ErrorPage from "./pages/ErrorPage";
 import Footer from "./components/Footer";
+import AdminLoginOverlay from "./components/AdminLoginOverlay";
 import { useState } from "react";
 
 function App() {
@@ -36,6 +37,10 @@ function App() {
               />
             }
           ></Route>
+          <Route
+            path="/admin/login"
+            element={<AdminLoginOverlay />}
+          ></Route>
 
           {/* LÄNGST NER */}
           <Route
@@ -43,6 +48,7 @@ function App() {
             element={<ErrorPage />}
           ></Route>
         </Routes>
+
         <Footer />
       </Router>
     </>
