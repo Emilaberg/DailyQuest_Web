@@ -9,10 +9,10 @@ function HomePage() {
         <section className="flex items-center justify-center min-h-screen">
           <Welcome />
         </section>
-        <section className="flex items-center justify-center ">
+        <section className="flex items-center justify-center">
           <TodaysQuest />
         </section>
-        <section>
+        <section className="flex items-center justify-center">
           <BrowseAll />
         </section>
         <section className="flex items-center justify-center">

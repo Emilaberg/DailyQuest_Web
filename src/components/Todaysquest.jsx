@@ -1,13 +1,13 @@
 function TodaysQuest() {
   return (
     <>
-      <div className="w-full mr-5 ml-5 ">
+      <div className="w-3/4 mr-5 ml-5">
         <div className="flex justify-center md:justify-start md:ml-3 lg:justify-start">
           <h1 className="text-white text-2xl uppercase font-bold mb-2 tracking-wider lg:text-3xl ">
             Todays quest
           </h1>
         </div>
-        <div className="flex w-full h-56 items-center justify-center bg-gradient-border px-4 py-4 rounded-[27px] mb-24 md:h-96">
+        <div className="flex w-full h-56 items-center justify-center bg-gradient-border px-4 py-4 rounded-[27px] mb-24 md:h-96 xl:h-[520px]">
           <div className="relative w-full h-full bg-center bg-no-repeat bg-cover rounded-[13.5px]  bg-[url('src/assets/images/cards/the_legend_of_zelda_breath_of_the_wild_4k-wide-1332745958.jpg')] ">
             <div className=" absolute w-full h-full bg-black rounded-[13.5px] opacity-50"></div>
             <div className="absolute justify-between flex w-full h-full items-center px-5">

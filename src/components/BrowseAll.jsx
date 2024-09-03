@@ -3,8 +3,8 @@ import GameCard from "./GameCard";
 function BrowseAll() {
   return (
     <>
-      <div className="flex flex-col ml-8 mr-8 mb-5 justify-start">
-        <div className="mr-6 mb-5 md:justify-start md:ml-3 lg:justify-start">
+      <div className="flex flex-col ml-8 mr-8 mb-5 w-3/4">
+        <div className="mr-6 mb-5 justify-start md:justify-start lg:justify-start">
           <div className="mb-2">
             <h1 className="text-white text-xl uppercase font-bold tracking-wider lg:text-3xl">
               Browse all

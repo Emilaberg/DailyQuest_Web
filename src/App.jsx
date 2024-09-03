@@ -6,37 +6,26 @@ import AdminPage from "./pages/AdminPage";
 import ErrorPage from "./pages/ErrorPage";
 import Footer from "./components/Footer";
 import { useState } from "react";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [isAdminPage, setIsAdminPage] = useState(false);
   return (
     <>
       <Router>
+        <Navbar />
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={<HomePage />}
-          ></Route>
-          <Route
-            path="/games"
-            element={<GamePage />}
-          ></Route>
+          <Route exact path="/" element={<HomePage />}></Route>
+          <Route path="/games" element={<GamePage />}></Route>
           <Route
             path="/admin"
             element={
-              <AdminPage
-                isAdmin={isAdminPage}
-                setIsAdmin={setIsAdminPage}
-              />
+              <AdminPage isAdmin={isAdminPage} setIsAdmin={setIsAdminPage} />
             }
           ></Route>
 
           {/* LÄNGST NER */}
-          <Route
-            path="*"
-            element={<ErrorPage />}
-          ></Route>
+          <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
         <Footer />
       </Router>
