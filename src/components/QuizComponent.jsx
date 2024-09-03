@@ -20,7 +20,7 @@ function QuizComponent() {
               previous
             </span>
           </div>
-          <div className="flex font-semibold items-center text-sm mx-3 md:mx-1 lg:mx-2 lg:text-lg max-w-[calc(screen/3)]">
+          <div className="flex font-semibold items-center text-sm mx-3 md:mx-1 lg:mx-10 lg:text-lg max-w-[calc(screen/3)]">
             <span className="min-w-0">
               What is the name of this handsome boy of this handsome boy of this
               handsome boy of this handsome boy of this handsome boy of this
