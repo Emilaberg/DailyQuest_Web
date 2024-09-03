@@ -3,6 +3,9 @@ import TodaysQuest from "../components/Todaysquest";
 import Navbar from "../components/Navbar";
 import ApiService from "../hooks/apiService";
 import { useEffect, useState } from "react";
+import BrowseAll from "../components/BrowseAll";
+import HelpingHand from "../components/HelpingHand";
+
 function HomePage() {
   const apiService = ApiService();
 
@@ -15,31 +18,23 @@ function HomePage() {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   console.log(quiz);
-  // }, [quiz]);
-
   return (
     <>
       <Navbar />
-      <section className="flex items-center justify-center min-h-screen">
-        <Welcome />
-      </section>
-      <section className="flex items-center justify-center ">
-        <TodaysQuest />
-      </section>
-      {quiz.length < 1 ? (
-        <div className="text-white">loading...</div>
-      ) : (
-        quiz.map((quiz) => (
-          <div
-            key={quiz.quizId}
-            className="text-white"
-          >
-            {quiz.quizName}
-          </div>
-        ))
-      )}
+      <div className="bg-[url(src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+        <section className="flex items-center justify-center min-h-screen">
+          <Welcome />
+        </section>
+        <section className="flex items-center justify-center ">
+          <TodaysQuest />
+        </section>
+        <section>
+          <BrowseAll />
+        </section>
+        <section className="flex items-center justify-center">
+          <HelpingHand />
+        </section>
+      </div>
     </>
   );
 }
