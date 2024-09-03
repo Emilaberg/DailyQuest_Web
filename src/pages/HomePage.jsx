@@ -15,7 +15,7 @@ function HomePage() {
         <section>
           <BrowseAll />
         </section>
-        <section>
+        <section className="flex items-center justify-center">
           <HelpingHand />
         </section>
       </div>
