@@ -1,10 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  ScrollRestoration,
+} from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import AdminPage from "./pages/AdminPage";
 import ErrorPage from "./pages/ErrorPage";
 import Footer from "./components/Footer";
+import AdminLoginOverlay from "./components/AdminLoginOverlay";
 import { useState } from "react";
 
 function App() {
@@ -19,7 +25,7 @@ function App() {
             element={<HomePage />}
           ></Route>
           <Route
-            path="/games"
+            path="/games/:game"
             element={<GamePage />}
           ></Route>
           <Route
@@ -31,6 +37,10 @@ function App() {
               />
             }
           ></Route>
+          <Route
+            path="/admin/login"
+            element={<AdminLoginOverlay />}
+          ></Route>
 
           {/* LÄNGST NER */}
           <Route
@@ -38,6 +48,7 @@ function App() {
             element={<ErrorPage />}
           ></Route>
         </Routes>
+
         <Footer />
       </Router>
     </>

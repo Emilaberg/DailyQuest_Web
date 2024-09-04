@@ -29,12 +29,19 @@ function ApiService() {
 
     return data;
   }
+
+  async function getQuizbyId(id) {
+    var data = await apicaller(`Quiz/${id}`);
+
+    return data;
+  }
+
   async function getAllAnswer() {
     var data = await apicaller("Answer");
     return data;
   }
 
-  return { getAllQuiz, getAllAnswer };
+  return { getAllQuiz, getAllAnswer, getQuizbyId };
 }
 
 export default ApiService;
