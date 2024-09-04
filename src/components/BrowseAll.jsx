@@ -3,9 +3,12 @@ import GameCard from "./GameCard";
 function BrowseAll() {
   return (
     <>
-      <div id="games" className="flex flex-col ml-8 mr-8 mb-5 justify-start">
+      <div
+        id="browse-games"
+        className="flex flex-col ml-8 mr-8 mb-5 justify-start"
+      >
         <div className="flex flex-col mb-5 justify-start pt-20">
-          <div className="mr-6 mb-5 md:justify-start md:ml-3 lg:justify-start">
+          <div className="mr-6 mb-5 md:justify-start md:ml-3">
             <div className="mb-2">
               <h1 className="text-white text-xl uppercase font-bold tracking-wider lg:text-3xl">
                 Browse all
@@ -26,7 +29,7 @@ function BrowseAll() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-3 px-20 py-10">
+          <div className="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-3">
             <GameCard
               imageUrl={"src/assets/images/cards/world-of-warcraft.png"}
               gameName={"World of Warcraft"}

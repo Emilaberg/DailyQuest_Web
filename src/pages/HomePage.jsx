@@ -30,7 +30,7 @@ function HomePage() {
         </section>
         <section
           id="games"
-          className="lg:my-72 lg:mx-72"
+          className="flex items-center justify-center  lg:my-72 lg:mx-72"
         >
           <BrowseAll />
         </section>
