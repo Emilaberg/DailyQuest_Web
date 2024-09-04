@@ -1,6 +1,24 @@
 import GameCard from "./GameCard";
+import ApiService from "../hooks/apiService";
+import { useState, useEffect } from "react";
 
 function BrowseAll() {
+  const apiService = ApiService();
+  const [quizzes, setQuizzes] = useState([]);
+  const [searchWord, setSearchWord] = useState("");
+
+  useEffect(() => {
+    async function fetchQuizzes() {
+      var response = await apiService.getAllMetaTags();
+      setQuizzes(response);
+    }
+    fetchQuizzes();
+  }, []);
+
+  const filterBrowser = quizzes.filter((quiz) =>
+    quiz.tagName.toLowerCase().includes(searchWord.toLowerCase())
+  );
+
   return (
     <>
       <div
@@ -21,6 +39,8 @@ function BrowseAll() {
                   type="text"
                   placeholder="Search.."
                   className="flex-1 p-2 text-white bg-midnightBlue border-none rounded-md outline-none font-bold"
+                  value={searchWord}
+                  onChange={(e) => setSearchWord(e.target.value)}
                 />
                 <button className="absolute right-0 mr-2 px-4 py-1 text-white bg-primaryblue rounded-md hover:bg-oceanBlue">
                   Search
@@ -30,7 +50,14 @@ function BrowseAll() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-3">
-            <GameCard
+            {filterBrowser.map((tag, index) => (
+              <GameCard
+                key={index}
+                imageUrl={"src/assets/images/cards/world-of-warcraft.png"}
+                gameName={tag.tagName}
+              />
+            ))}
+            {/* <GameCard
               imageUrl={"src/assets/images/cards/world-of-warcraft.png"}
               gameName={"World of Warcraft"}
             />
@@ -53,7 +80,7 @@ function BrowseAll() {
             <GameCard
               imageUrl={"src/assets/images/cards/GTA_5.png"}
               gameName={"Grand Theft Auto 5"}
-            />
+            /> */}
           </div>
         </div>
       </div>

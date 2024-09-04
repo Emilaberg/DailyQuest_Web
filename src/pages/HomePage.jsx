@@ -5,6 +5,7 @@ import ApiService from "../hooks/apiService";
 import { useEffect, useState } from "react";
 import BrowseAll from "../components/BrowseAll";
 import HelpingHand from "../components/HelpingHand";
+import RecentlyAdded from "../components/RecentlyAdded";
 
 function HomePage() {
   const apiService = ApiService();
@@ -25,16 +26,19 @@ function HomePage() {
         <section className="flex items-center justify-center min-h-screen ">
           <Welcome />
         </section>
-        <section className="flex items-center justify-center lg:-mt-52 lg:mb-72 lg:mx-52">
+        <section className="flex items-center justify-center lg:-mt-52 lg:mb-72 ">
           <TodaysQuest />
+        </section>
+        <section className="flex items-center justify-center lg:mx-16">
+          <RecentlyAdded />
         </section>
         <section
           id="games"
-          className="flex items-center justify-center  lg:my-72 lg:mx-72"
+          className="flex items-center justify-center  lg:my-36 lg:mx-16"
         >
           <BrowseAll />
         </section>
-        <section className="flex items-center justify-center lg:my-72 lg:mx-52">
+        <section className="flex items-center justify-center lg:my-72 ">
           <HelpingHand />
         </section>
       </div>
