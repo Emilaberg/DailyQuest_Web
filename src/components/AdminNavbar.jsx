@@ -3,7 +3,7 @@ function AdminNavbar() {
     <nav className="flex justify-between h-20 rounded-xl bg-gradient-primary mx-5 mt-5">
       <img
         className="ml-10 w-64"
-        src="src\assets\icons\Webicon_admin.svg"
+        src="../src/assets/icons/Webicon_admin.svg"
         alt=""
       />
       <div className="flex justify-between items-center text-white mr-10">
