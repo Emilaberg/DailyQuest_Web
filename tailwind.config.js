@@ -5,6 +5,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      boxShadow: {
+        around: "0 0px 40px -5px rgba(0, 0, 0, 0.3)",
+      },
       fontFamily: {
         sans: ['"inter"', ...defaultTheme.fontFamily.sans],
       },

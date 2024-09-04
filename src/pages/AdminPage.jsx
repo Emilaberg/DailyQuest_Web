@@ -1,22 +1,23 @@
 import SideBar from "../components/SideBar.jsx";
 import TrackedEmails from "../components/TrackedEmails.jsx";
 import AvailableQuizzes from "../components/AvailableQuizzes.jsx";
-import { redirect, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import AdminNavbar from "../components/adminNavbar.jsx";
-function AdminPage({ isAdmin, setIsAdmin }) {
-  const location = useLocation();
+import { redirect, useLoaderData, useLocation } from "react-router-dom";
 
-  useEffect(() => {
-    console.log("Location changed");
-    if (location.pathname == "/admin") {
-      setIsAdmin(true);
-    } else {
-    }
-  }, [location]);
+//hämta data
+//loaders (om det används)  måste returnera något. om det inte ska returnera något, returnera null
+export async function loader() {
+  return null;
+}
+
+//hantera form actions
+//actions (om det används) måste returnera något. om det inte ska returnera något, returnera null
+export async function action() {
+  return null;
+}
+
+export default function AdminPage() {
   return (
     <>
-      <AdminNavbar />
       <div>
         <div className="flex h-screen">
           <SideBar />
@@ -30,5 +31,3 @@ function AdminPage({ isAdmin, setIsAdmin }) {
     </>
   );
 }
-
-export default AdminPage;
