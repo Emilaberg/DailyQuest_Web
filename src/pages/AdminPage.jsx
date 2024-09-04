@@ -3,8 +3,21 @@ import TrackedEmails from "../components/TrackedEmails.jsx";
 import AvailableQuizzes from "../components/AvailableQuizzes.jsx";
 import CreateQuiz from "../components/CreateQuiz.jsx";
 import AddNewQuestion from "../components/AddNewQuestion.jsx";
+import { redirect, useLoaderData, useLocation } from "react-router-dom";
 
-function AdminPage() {
+//hämta data
+//loaders (om det används)  måste returnera något. om det inte ska returnera något, returnera null
+export async function loader() {
+  return null;
+}
+
+//hantera form actions
+//actions (om det används) måste returnera något. om det inte ska returnera något, returnera null
+export async function action() {
+  return null;
+}
+
+export default function AdminPage() {
   return (
     <>
       <div>
@@ -22,7 +35,6 @@ function AdminPage() {
 
             {/* Display for all quizzes */}
             <AvailableQuizzes />
-
             {/* PLACEHOLDER DISPLAY FOR CREATE QUIZ*/}
             <CreateQuiz />
             <AddNewQuestion />
@@ -32,5 +44,3 @@ function AdminPage() {
     </>
   );
 }
-
-export default AdminPage;
