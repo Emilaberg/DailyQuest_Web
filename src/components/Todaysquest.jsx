@@ -1,7 +1,7 @@
 function TodaysQuest() {
   return (
     <>
-      <div className="w-full">
+      <div className="w-3/4">
         <div className="flex justify-center md:justify-start md:ml-3 lg:justify-start">
           <h1 className="text-white text-2xl uppercase font-bold mb-2 tracking-wider lg:text-3xl ">
             Todays quest
@@ -16,11 +16,11 @@ function TodaysQuest() {
                 className="cursor-pointer hover:bg-white"
               />
               <div className="flex flex-col items-center mb-12 md:mb-28">
-                <h1 className="text-white text-xl text-center text-shadow-2xl opacity-80 leading-tight md:text-4xl lg:text-5xl">
+                <h1 className="text-white text-lg text-center text-shadow-2xl opacity-80 leading-tight md:text-4xl lg:text-5xl">
                   Uncover Hyrule's Secrets <br />
                   in an Epic Adventure!
                 </h1>
-                <button className="text-white font-bold text-xs border-2 rounded-xl w-36 border-blue-600 bg-slateBlue hover:bg-blue-600 mt-3 md:w-48 md:text-base md:mt-3 lg:w-60 lg:text-lg">
+                <button className="text-white font-bold text-xs border-2 rounded-xl w-36 h-8 border-blue-600 bg-slateBlue hover:bg-blue-600 mt-3 md:w-48 md:text-base md:mt-3 lg:w-60 lg:text-lg">
                   PLAY THE QUIZ NOW
                 </button>
               </div>

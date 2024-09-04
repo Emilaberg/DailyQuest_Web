@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 function NavLinks() {
   return (
     <div className="capitalize hidden text-lightSlateGray md:grow md:flex md:justify-end md:visible md:text-[18px] md:gap-7 lg:gap-10 lg:text-[22px]  xl:text-[27px] xl:gap-20 font-bold">
-      <a href="#games">Games</a>
+      <a href="#browse-games">Games</a>
       <Link to="/">Todays Quiz</Link>
-      <Link to="/">About is</Link>
+      <Link to="/">About us</Link>
     </div>
   );
 }
