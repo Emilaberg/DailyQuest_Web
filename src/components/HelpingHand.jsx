@@ -1,4 +1,8 @@
+import { useLoaderData } from "react-router-dom";
+
 function HelpingHand() {
+  const variableFromLoader = useLoaderData();
+  console.log(variableFromLoader);
   return (
     <>
       {/* Wrapper */}
