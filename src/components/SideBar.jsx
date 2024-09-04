@@ -11,7 +11,7 @@ function SideBar() {
       <div className="w-10"></div>
       <div className="w-64 bg-adminGray text-white">
         <div className="p-4 flex items-center mt-10 bg-gradient-primary">
-          <img src={dashboard} alt="Dashboard" className="w-5 h-5 mr-2 ml-3" />
+          <img src={dashboard} alt="Dashboard" className="w-7 h-7 mr-2 ml-3" />
           DashBoard
         </div>
 
@@ -19,32 +19,36 @@ function SideBar() {
         <div className="p-4">
           <ul>
             <li className="mb-2 flex items-center  ml-3 mt-3">
-              <img src={plusSolid} alt="Add Quiz" className="w-5 h-5 mr-2" />
-              <a href="#" className="hover:text-gray-300">
+              <a href="#" className="hover:text-gray-300 flex items-center">
+                <img src={plusSolid} alt="Add Quiz" className="w-7 h-7 mr-2" />
                 Add Quiz
               </a>
             </li>
             <li className="mb-2 flex items-center  ml-3 mt-6">
-              <img src={mail} alt="Emails" className="w-5 h-5 mr-2" />
-              <a href="#" className="hover:text-gray-300">
+              <a href="#" className="hover:text-gray-300 flex items-center">
+                <img src={mail} alt="Emails" className="w-7 h-7 mr-2" />
                 Emails
               </a>
             </li>
             <li className="mb-2 flex items-center  ml-3 mt-6">
-              <img src={settings} alt="Settings" className="w-5 h-5 mr-2" />
-              <a href="#" className="hover:text-gray-300">
+              <a href="#" className="hover:text-gray-300 flex items-center">
+                <img src={settings} alt="Settings" className="w-7 h-7 mr-2" />
                 Settings
               </a>
             </li>
             <li className="mb-2 flex items-center  ml-3 mt-6">
-              <img src={userSettings} alt="Profile" className="w-5 h-5 mr-2" />
-              <a href="#" className="hover:text-gray-300">
+              <a href="#" className="hover:text-gray-300 flex items-center">
+                <img
+                  src={userSettings}
+                  alt="Profile"
+                  className="w-7 h-7 mr-2"
+                />
                 Profile
               </a>
             </li>
             <li className="mb-2 flex items-center  ml-3 mt-6">
-              <img src={logout} alt="Logout" className="w-5 h-5 mr-2" />
-              <a href="#" className="hover:text-gray-300">
+              <a href="#" className="hover:text-gray-300 flex items-center">
+                <img src={logout} alt="Logout" className="w-7 h-7 mr-2" />
                 Logout
               </a>
             </li>

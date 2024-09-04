@@ -52,7 +52,7 @@ const AvailableQuizzes = () => {
         <h1>Dashboard Details</h1>
       </div>
       <div className="text-4xl flex items-center justify-center border-b-2 border-white">
-        <h1>Tracked Emails</h1>
+        <h1>Available Quizzes</h1>
       </div>
 
       {/* Table Header */}
@@ -90,10 +90,17 @@ const AvailableQuizzes = () => {
         <img
           src={removeIcon}
           alt="Delete"
-          className="w-7 h-7 mt-1 mr-1 cursor-pointer"
+          className={`w-7 h-7 mt-1 mr-1 cursor-pointer ${
+            selectedIndex !== null ? "opacity-100" : "opacity-50"
+          }`}
         />
         <p className="cursor-pointer align-text-top">Remove Selected</p>
-        <button className="border-2 border-lavender w-24 rounded-lg mt-2 bg-midnightBlue ml-auto active:bg-gradient-primary">
+        <button
+          className={`border-2 border-lavender w-24 rounded-lg mt-2 ml-auto 
+          ${
+            selectedIndex !== null ? "bg-gradient-primary" : "bg-midnightBlue"
+          }`}
+        >
           Action
         </button>
       </div>
