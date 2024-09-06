@@ -7,6 +7,7 @@ import BrowseAll from "../components/BrowseAll";
 import HelpingHand from "../components/HelpingHand";
 import RecentlyAdded from "../components/RecentlyAdded";
 import { useLoaderData } from "react-router-dom";
+import Newsletter from "../components/NewsletterComponent";
 
 //hämta data
 //loaders (om det används) måste returnera något. om det inte ska returnera något, returnera null
@@ -23,6 +24,7 @@ export async function action() {
 function HomePage() {
   const apiService = ApiService();
   const variableFromLoader = useLoaderData();
+  const [isOpen, setIsOpen] = useState(false);
 
   console.log(variableFromLoader);
 
@@ -38,6 +40,17 @@ function HomePage() {
             imageUrl="src/assets/images/cards/the_legend_of_zelda_breath_of_the_wild_4k-wide-1332745958.jpg"
             quizName="Todays quest"
           />
+        </section>
+        <div className="flex justify-center items-center">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="text-xl p-2 text-white font-semibold border-[1px] bg-transparent border-lightSlateGray rounded-[10px]  hover:bg-primaryblue hover:border-primaryblue transition-all ease-in duration-200"
+          >
+            Subscribe
+          </button>
+        </div>
+        <section className="flex items-center justify-center lg:my-72 lg:mx-72 ">
+          <Newsletter open={isOpen} onClose={() => setIsOpen(false)} />
         </section>
         <section className="flex items-center justify-center lg:mx-16">
           <RecentlyAdded />
