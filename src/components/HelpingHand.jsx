@@ -22,7 +22,6 @@ function HelpingHand() {
             />
           </button>
           <button className="w-[33%] h-10 border-[3px] rounded-[12px] border-primaryblue bg-slateBlue  text-lightSlateGray text-[12px] font-semibold flex flex-row items-center justify-between pl-3 pr-3 hover:bg-hoverBlueHelp md:h-16 md:text-[20px] md:pl-5 lg:text-[26px] lg:h-24">
-            I need help
             <img
               src="src\assets\icons\questionmark.svg"
               alt=""
