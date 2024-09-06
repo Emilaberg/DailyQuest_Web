@@ -1,5 +1,6 @@
 import QuizComponent from "../components/QuizComponent";
 import Navbar from "../components/Navbar";
+import TodaysQuest from "../components/Todaysquest";
 
 //hämta data
 //loaders (om det används) måste returnera något. om det inte ska returnera något, returnera null
@@ -16,9 +17,15 @@ export async function action() {
 export default function GamePage() {
   return (
     <>
-      <div className="min-h-screen">
+      <section className="flex items-center justify-center  lg:mx-72 ">
+        <TodaysQuest
+          imageUrl={"../src/assets/images/Image-missing.jpg"}
+          textPrompt="THIS IS WHERE AWESOME TEXT SHOULD BE "
+        />
+      </section>
+      <section className="min-h-screen">
         <QuizComponent />
-      </div>
+      </section>
     </>
   );
 }
