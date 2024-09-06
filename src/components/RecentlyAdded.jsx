@@ -3,20 +3,22 @@ import ApiService from "../hooks/apiService";
 import { useState, useEffect } from "react";
 
 function RecentlyAdded() {
-  const [tags, setTags] = useState([]);
+  const [quizzes, setQuizzes] = useState([]);
   const [fetchError, setFetchError] = useState(false);
   const apiService = ApiService();
+
   useEffect(() => {
-    async function fetchRecentTags() {
-      var response = await apiService.getAllMetaTags();
+    async function fetchRecentQuiz() {
+      var response = await apiService.getAllQuiz();
+      // console.log(response.$values.slice(-3));
       if (response === 0) {
         setFetchError(true);
       } else {
-        const latestsTags = response.slice(-3);
-        setTags(latestsTags);
+        const latestQuizzes = response.$values.slice(-3);
+        setQuizzes(latestQuizzes);
       }
     }
-    fetchRecentTags();
+    fetchRecentQuiz();
   }, []);
   return (
     <>
@@ -32,8 +34,8 @@ function RecentlyAdded() {
               Failed to fetch. Please try again later.
             </div>
           ) : (
-            tags.map((tag, index) => (
-              <GradiantButton buttonText={tag.tagName} key={index} />
+            quizzes.map((quiz, index) => (
+              <GradiantButton buttonText={quiz.quizName} key={index} />
             ))
           )}
           {/* <GradiantButton buttonText="League of Legends" />

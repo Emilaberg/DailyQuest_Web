@@ -10,18 +10,19 @@ function BrowseAll() {
 
   useEffect(() => {
     async function fetchQuizzes() {
-      var response = await apiService.getAllMetaTags();
-      if (response.lenght === 0) {
+      var response = await apiService.getAllQuiz();
+      console.log(response);
+      if (response === 0) {
         setFetchError(true);
       } else {
-        setQuizzes(response);
+        setQuizzes(response.$values);
       }
     }
     fetchQuizzes();
   }, []);
 
   const filterBrowser = quizzes.filter((quiz) =>
-    quiz.tagName.toLowerCase().includes(searchWord.toLowerCase())
+    quiz.quizName.toLowerCase().includes(searchWord.toLowerCase())
   );
 
   return (
@@ -67,11 +68,11 @@ function BrowseAll() {
                 Failed to fetch quiz. Please try again later.
               </div>
             ) : (
-              filterBrowser.map((tag, index) => (
+              filterBrowser.map((quiz, index) => (
                 <GameCard
                   key={index}
                   imageUrl={"src/assets/images/cards/world-of-warcraft.png"}
-                  gameName={tag.tagName}
+                  gameName={quiz.quizName}
                 />
               ))
             )}
