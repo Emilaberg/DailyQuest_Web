@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import settings from "../assets/icons/settings.svg";
 import removeIcon from "../assets/icons/remove_icon.svg";
+import { Outlet } from "react-router-dom";
 
 const CreateQuiz = () => {
   // Select item

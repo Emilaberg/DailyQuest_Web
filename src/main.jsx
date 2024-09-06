@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import ErrorPage from "./pages/ErrorPage.jsx";
@@ -18,6 +18,10 @@ import AdminLoginOverlay from "./components/AdminLoginOverlay.jsx";
 //loaders
 import { loader as adminLoader } from "./routes/rootAdmin.jsx";
 import { loader as homePageLoader } from "./pages/HomePage.jsx";
+import TrackedEmails from "./components/TrackedEmails.jsx";
+import AvailableQuizzes from "./components/AvailableQuizzes.jsx";
+import AddQuiz from "./components/AddQuiz.jsx";
+import AdminStatistics from "./components/AdminStatistics.jsx";
 
 const router = createBrowserRouter([
   //routes för gamepage
@@ -52,6 +56,28 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <AdminPage />,
+        children: [
+          {
+            index: true,
+            element: <div className="text-white">Nothing yet</div>,
+          },
+          {
+            path: "admin-statistics",
+            element: <AdminStatistics />,
+          },
+          {
+            path: "tracked-emails",
+            element: <TrackedEmails />,
+          },
+          {
+            path: "available-quizzes",
+            element: <AvailableQuizzes />,
+          },
+          {
+            path: "add-quiz",
+            element: <AddQuiz />,
+          },
+        ],
       },
       {
         path: "login",
