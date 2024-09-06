@@ -100,7 +100,7 @@ const AvailableQuizzes = () => {
           ${
             selectedIndex !== null ? "bg-gradient-primary" : "bg-midnightBlue"
           }`}
-        >
+          >
           Action
         </button>
       </div>
