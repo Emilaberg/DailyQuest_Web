@@ -10,8 +10,7 @@ function RecentlyAdded() {
   useEffect(() => {
     async function fetchRecentQuiz() {
       var response = await apiService.getAllQuiz();
-      // console.log(response.$values.slice(-3));
-      if (response === 0) {
+      if (response.$values === 0) {
         setFetchError(true);
       } else {
         const latestQuizzes = response.$values.slice(-3);
@@ -38,9 +37,6 @@ function RecentlyAdded() {
               <GradiantButton buttonText={quiz.quizName} key={index} />
             ))
           )}
-          {/* <GradiantButton buttonText="League of Legends" />
-          <GradiantButton buttonText="World of Warcraft" />
-          <GradiantButton buttonText="Counter-strike" /> */}
         </div>
       </div>
     </>

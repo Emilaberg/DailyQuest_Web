@@ -12,7 +12,7 @@ function BrowseAll() {
     async function fetchQuizzes() {
       var response = await apiService.getAllQuiz();
       console.log(response);
-      if (response === 0) {
+      if (response.$values === 0) {
         setFetchError(true);
       } else {
         setQuizzes(response.$values);
