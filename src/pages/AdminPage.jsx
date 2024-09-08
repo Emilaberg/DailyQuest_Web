@@ -28,7 +28,7 @@ export default function AdminPage() {
         {/* Main Content Holders */}
         <div
           className={`flex-grow transition-all duration-300 ${
-            isSidebarOpen ? "ml-0" : "-ml-64"
+            isSidebarOpen ? "ml-10" : "-ml-64"
           }`}
         >
           {/* Hamburger Menu for smaller screens */}
@@ -52,9 +52,8 @@ export default function AdminPage() {
               />
             </svg>
           </button>
-          <div className="mr-20">
-            <Outlet />
-          </div>
+
+          <Outlet />
         </div>
       </div>
     </>

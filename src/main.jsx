@@ -1,7 +1,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+} from "react-router-dom";
 
 import "./index.css";
 import ErrorPage from "./pages/ErrorPage.jsx";
@@ -53,6 +58,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     loader: adminLoader,
     children: [
+      {
+        index: true,
+        element: <Navigate to="dashboard/admin-statistics" replace />,
+      },
       {
         path: "dashboard",
         element: <AdminPage />,
