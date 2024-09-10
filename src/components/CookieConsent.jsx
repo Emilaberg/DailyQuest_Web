@@ -1,3 +1,8 @@
+// src/utils/checkConsentStatus.js
+export const checkCookieConsent = () => {
+  return localStorage.getItem("cookieConsent");
+};
+
 import React, { useState, useEffect } from "react";
 
 const CookieConsent = () => {
@@ -28,21 +33,21 @@ const CookieConsent = () => {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex justify-between items-center shadow-md">
-      <p className="text-sm">
+    <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex flex-col md:flex-row justify-between items-center shadow-md gap-4 md:gap-6">
+      <p className="text-sm md:text-base">
         We use cookies to improve your experience. By using our site, you agree
         to our use of cookies.
       </p>
-      <div className="space-x-4">
+      <div className="flex flex-col md:flex-row justify-center gap-4 w-full md:w-auto">
         <button
           onClick={handleAccept}
-          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+          className="w-full md:w-auto px-6 py-3 border-[3px] rounded-[12px] border-primaryblue bg-slateBlue text-lightSlateGray text-[14px] font-semibold hover:bg-hoverBlueHelp transition duration-300 ease-in-out transform hover:scale-105 md:px-8 md:py-4 lg:px-10 lg:py-5"
         >
           Accept
         </button>
         <button
           onClick={handleDecline}
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+          className="w-full md:w-auto px-6 py-3 border-[3px] rounded-[12px] border-primaryblue bg-slateBlue text-lightSlateGray text-[14px] font-semibold hover:bg-hoverBlueHelp transition duration-300 ease-in-out transform hover:scale-105 md:px-8 md:py-4 lg:px-10 lg:py-5"
         >
           Decline
         </button>
