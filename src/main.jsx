@@ -1,7 +1,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+} from "react-router-dom";
 
 import "./index.css";
 import ErrorPage from "./pages/ErrorPage.jsx";
@@ -22,6 +27,15 @@ import { action as reportAction } from "./routes/ReportForm.jsx";
 import { loader as adminLoader } from "./routes/rootAdmin.jsx";
 import { loader as homePageLoader } from "./pages/HomePage.jsx";
 import { loader as gamePageLoader } from "./pages/GamePage.jsx";
+
+import TrackedEmails from "./components/TrackedEmails.jsx";
+import AvailableQuizzes from "./components/AvailableQuizzes.jsx";
+import AddQuiz from "./components/AddQuiz.jsx";
+import AdminStatistics from "./components/AdminStatistics.jsx";
+import FaqPage from "./pages/FaqPage.jsx";
+import ReportForm from "./routes/ReportForm.jsx";
+
+
 
 const router = createBrowserRouter([
   //routes för gamepage
@@ -70,8 +84,34 @@ const router = createBrowserRouter([
     loader: adminLoader,
     children: [
       {
+        index: true,
+        element: <Navigate to="dashboard/admin-statistics" replace />,
+      },
+      {
         path: "dashboard",
         element: <AdminPage />,
+        children: [
+          {
+            index: true,
+            element: <div className="text-white">Nothing yet</div>,
+          },
+          {
+            path: "admin-statistics",
+            element: <AdminStatistics />,
+          },
+          {
+            path: "tracked-emails",
+            element: <TrackedEmails />,
+          },
+          {
+            path: "available-quizzes",
+            element: <AvailableQuizzes />,
+          },
+          {
+            path: "add-quiz",
+            element: <AddQuiz />,
+          },
+        ],
       },
       {
         path: "login",
