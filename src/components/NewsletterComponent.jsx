@@ -1,6 +1,51 @@
 import ReactDom from "react-dom";
+import { useState, useEffect } from "react";
 
 function Newsletter({ open, onClose }) {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(null);
+
+  const handleSubmit = async (e) => {
+    // Prevents reloading of the page
+    e.preventDefault();
+    // Resetting states
+    setError(null);
+    setLoading(true);
+    setSuccess(null);
+
+    const dateLastSent = new Date().toISOString(); // Changes date to ISO format (2024-09-06T14:48:00.000Z)
+    try {
+      const response = await fetch("https://localhost:7174/api/Email/wombat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, dateLastSent }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to subscribe");
+      }
+
+      setSuccess("Success");
+      console.log("Subscription successful");
+    } catch (error) {
+      setError(error.message);
+      console.error("Error", error);
+    } finally {
+      setLoading(false);
+      setEmail("");
+    }
+  };
+
+  useEffect(() => {
+    if (!open) {
+      setSuccess(null);
+    }
+  }, [open]);
+
   if (!open) return null;
   return ReactDom.createPortal(
     <>
@@ -26,7 +71,31 @@ function Newsletter({ open, onClose }) {
                 />
               </div>
               <div className="flex flex-col gap-6 items-center w-full mb-20">
-                {" "}
+                <label className="font-semibold text-3xl mb-3">Subscribe</label>
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex items-center flex-col"
+                >
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    required
+                    className="h-10 text-xl bg-midnightBlue border-solid border border-lightSlateGray rounded-xl px-3 placeholder-lightSlateGray/40 placeholder focus:outline-none"
+                  />
+                  {/* If there is an error */}
+                  {error && <p className="text-red-500">{error}</p>}
+                  {/* If its a success */}
+                  {success && <p className="text-green-500 mt-2">{success}</p>}
+                  <button
+                    type="submit"
+                    className="mt-4 border border-solid border-lightSlateGray rounded-xl px-5 py-1 font-semibold hover:bg-primaryblue hover:border-primaryblue transition-all ease-in duration-200"
+                  >
+                    {loading ? "Submitting" : "Submit"}
+                  </button>
+                </form>
+                {/* {" "}
                 <label className="font-semibold text-3xl mb-3">Subscribe</label>
                 <input
                   type="text"
@@ -35,7 +104,7 @@ function Newsletter({ open, onClose }) {
                 />
                 <button className="mt-4 border border-solid border-lightSlateGray rounded-xl px-5 py-1 font-semibold hover:bg-primaryblue hover:border-primaryblue transition-all ease-in duration-200">
                   Submit
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

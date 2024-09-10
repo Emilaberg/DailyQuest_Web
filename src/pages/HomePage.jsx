@@ -41,17 +41,6 @@ function HomePage() {
             quizName="Todays quest"
           />
         </section>
-        <div className="flex justify-center items-center">
-          <button
-            onClick={() => setIsOpen(true)}
-            className="text-xl p-2 text-white font-semibold border-[1px] bg-transparent border-lightSlateGray rounded-[10px]  hover:bg-primaryblue hover:border-primaryblue transition-all ease-in duration-200"
-          >
-            Subscribe
-          </button>
-        </div>
-        <section className="flex items-center justify-center lg:my-72 lg:mx-72 ">
-          <Newsletter open={isOpen} onClose={() => setIsOpen(false)} />
-        </section>
         <section className="flex items-center justify-center lg:mx-16">
           <RecentlyAdded />
         </section>
