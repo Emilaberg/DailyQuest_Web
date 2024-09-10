@@ -73,6 +73,7 @@ function BrowseAll() {
                   key={index}
                   imageUrl={"src/assets/images/cards/world-of-warcraft.png"}
                   gameName={quiz.quizName}
+                  quizId={quiz.quizId}
                 />
               ))
             )}

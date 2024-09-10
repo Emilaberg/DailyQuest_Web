@@ -1,17 +1,28 @@
-import { Form } from "react-router-dom";
+import { Form, redirect, useNavigate } from "react-router-dom";
+import ApiService from "../hooks/apiService";
+
+export async function action({ request, params }) {
+  const apiCaller = ApiService();
+  const formData = await request.formData();
+  const updates = Object.fromEntries(formData);
+  console.log(updates);
+  await apiCaller.createReport(updates);
+  alert("Report succesfully submitted");
+  return redirect("/frequently-asked-questions");
+}
 
 function ReportForm() {
+  const navigate = useNavigate();
   return (
-    <main className="relative min-h-screen flex flex-col justify-center bg-slate-50 overflow-hidden">
+    <section className="relative min-h-screen">
       <div>
-        <div className="grid sm:grid-cols-2 items-start gap-16 p-4 mx-auto max-w-4xl bg-white font-[sans-serif]">
+        <div className="grid sm:grid-cols-2 items-start gap-16 p-4 mx-auto max-w-4xl bg-white ">
           <div>
             <h1 className="text-gray-800 text-3xl font-extrabold">
-              Let's Talk
+              Having problems? Let's Talk.
             </h1>
             <p className="text-sm text-gray-500 mt-4">
-              Have some big idea or brand to develop and need help? Then reach
-              out we'd love to hear about your project and provide help.
+              Having some issues? Then reach out, we'd love to hear about it.
             </p>
 
             <div className="mt-12">
@@ -34,7 +45,7 @@ function ReportForm() {
                   </div>
                   <a className="text-[#007bff] text-sm ml-4">
                     <small className="block">Mail</small>
-                    <strong>info@example.com</strong>
+                    <strong>issue@dailyquest.com</strong>
                   </a>
                 </li>
               </ul>
@@ -45,7 +56,7 @@ function ReportForm() {
 
               <ul className="flex mt-4 space-x-4">
                 <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-                  <a href="javascript:void(0)">
+                  <a>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20px"
@@ -61,7 +72,7 @@ function ReportForm() {
                   </a>
                 </li>
                 <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-                  <a href="javascript:void(0)">
+                  <a>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20px"
@@ -77,7 +88,7 @@ function ReportForm() {
                   </a>
                 </li>
                 <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-                  <a href="javascript:void(0)">
+                  <a>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20px"
@@ -93,37 +104,52 @@ function ReportForm() {
             </div>
           </div>
 
-          <Form className="ml-auto space-y-4">
+          <Form
+            className="ml-auto space-y-4"
+            method="post"
+            id="report-form"
+          >
             <input
               type="text"
               placeholder="Name"
+              name="first"
               className="w-full rounded-md py-3 px-4 bg-gray-100 text-gray-800 text-sm outline-blue-500 focus:bg-transparent"
             />
             <input
               type="email"
               placeholder="Email"
+              name="Email"
               className="w-full rounded-md py-3 px-4 bg-gray-100 text-gray-800 text-sm outline-blue-500 focus:bg-transparent"
             />
             <input
               type="text"
               placeholder="Subject"
+              name="Subject"
               className="w-full rounded-md py-3 px-4 bg-gray-100 text-gray-800 text-sm outline-blue-500 focus:bg-transparent"
             />
             <textarea
               placeholder="Message"
-              rows="6"
+              name="Message"
+              rows={6}
               className="w-full rounded-md px-4 bg-gray-100 text-gray-800 text-sm pt-3 outline-blue-500 focus:bg-transparent"
             ></textarea>
             <button
-              type="button"
+              type="submit"
               className="text-white bg-blue-500 hover:bg-blue-600 tracking-wide rounded-md text-sm px-4 py-3 w-full !mt-6"
             >
               Send
             </button>
+            <button
+              type="button"
+              className="text-white bg-blue-500 hover:bg-blue-600 tracking-wide rounded-md text-sm px-4 py-3 w-full !mt-6"
+              onClick={() => navigate(-1)}
+            >
+              cancel
+            </button>
           </Form>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
 
