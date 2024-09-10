@@ -29,6 +29,12 @@ function ApiService() {
 
     return data;
   }
+  async function createReport(formData) {
+    //formData är ett objekt med values.
+    // var data = await apicaller("Report");
+
+    return "ok";
+  }
 
   async function getQuizbyId(id) {
     var data = await apicaller(`Quiz/${id}`);
@@ -41,7 +47,18 @@ function ApiService() {
     return data;
   }
 
-  return { getAllQuiz, getAllAnswer, getQuizbyId };
+  async function getAllMetaTags() {
+    var data = await apicaller("MetaTag");
+    return data;
+  }
+
+  return {
+    getAllQuiz,
+    getAllAnswer,
+    getQuizbyId,
+    getAllMetaTags,
+    createReport,
+  };
 }
 
 export default ApiService;

@@ -52,21 +52,25 @@ const TrackedEmails = () => {
   };
 
   return (
-    <div className="text-white flex-1 w-full bg-midnightBlue p-8 ml-10 mr-10 mt-10 mb-10">
+    <div className="text-white flex-1 w-full bg-midnightBlue p-8">
       {/* Header Section */}
       <div className="p-4 flex items-center justify-center text-lavender">
         <h1>Dashboard Details</h1>
       </div>
-      <div className="text-4xl flex items-center justify-center border-b-2 border-white">
+      <div className="md:text-4xl text-2x1 flex items-center justify-center border-b-2 border-adminLightSlateGray">
         <h1>Tracked Emails</h1>
       </div>
 
       {/* Table Header */}
       <div className="flex justify-between items-center mt-4 p-2 bg-adminGray rounded-lg h-12 font-bold">
-        <p className="flex-1 text-left ml-12">Name & Email</p>
-        <p className="flex-1 text-right mr-2">Role</p>
-        <p className="flex-1 text-right ml-2">Email Sent</p>
-        <p className="flex-1 text-right mr-12">Actions</p>
+        <p className="md:text-1xl text-sm flex-1 text-left ml-4 md:ml-12">
+          Name & Email
+        </p>
+        <p className="md:text-1xl text-sm flex-1 text-right mr-2">Role</p>
+        <p className="md:text-1xl text-sm flex-1 text-right ml-2">Email Sent</p>
+        <p className="md:text-1xl text-sm flex-1 text-right mr-4 md:mr-12">
+          Actions
+        </p>
       </div>
 
       {/* Table Rows + Scrollbar */}
@@ -79,7 +83,7 @@ const TrackedEmails = () => {
               hover:bg-adminGray hover:text-white transition-all duration-300 `}
             onClick={() => handleRowClick(index)}
           >
-            <div className="flex-1 text-left ml-12">
+            <div className="flex-1 text-left ml-4 md:ml-12">
               <span className="block">{item.username}</span>
               <span className="block text-sm">{item.email}</span>
             </div>
@@ -89,7 +93,7 @@ const TrackedEmails = () => {
             <div className="flex-1 text-right">
               <span>✔</span> {/* Placeholder for Email Sent */}
             </div>
-            <div className="flex-1 text-right mr-12">
+            <div className="flex-1 text-right mr-4 md:mr-12">
               <span>{item.actions}</span>
             </div>
           </div>
@@ -97,14 +101,21 @@ const TrackedEmails = () => {
       </div>
 
       {/* Delete item in list & Action button - !!! NOT FUNCTIONING ATM !!! */}
-      <div className="border-t-2 border-white mt-4 flex items-center">
+      <div className="border-t-2 border-adminLightSlateGray mt-4 flex items-center">
         <img
           src={removeIcon}
           alt="Delete"
-          className="w-7 h-7 mt-1 mr-1 cursor-pointer"
+          className={`w-7 h-7 mt-1 mr-1 cursor-pointer ${
+            selectedIndex !== null ? "opacity-100" : "opacity-50"
+          }`}
         />
         <p className="cursor-pointer align-text-top">Remove Selected</p>
-        <button className="border-2 border-lavender w-24 rounded-lg mt-2 bg-midnightBlue ml-auto active:bg-gradient-primary">
+        <button
+          className={`border-2 border-lavender w-24 rounded-lg mt-2 ml-auto 
+          ${
+            selectedIndex !== null ? "bg-gradient-primary" : "bg-midnightBlue"
+          }`}
+        >
           Action
         </button>
       </div>
