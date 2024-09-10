@@ -1,9 +1,11 @@
 import React from "react";
 import { useDraggable } from "@dnd-kit/core";
 
-function Draggable({ id, children }) {
+function Draggable({ id, children, dragHandle }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
+    // Define the drag handle
+    dragHandle,
   });
 
   const style = transform
@@ -14,14 +16,14 @@ function Draggable({ id, children }) {
     : undefined;
 
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...listeners}
-      {...attributes}
-      onDragStart={(e) => e.preventDefault()} // Prevent default drag behavior for images
-    >
-      {children}
+    <div ref={setNodeRef} style={style}>
+      {/* Apply listeners only to the drag handle */}
+      {React.Children.map(children, (child) =>
+        React.cloneElement(child, {
+          ...attributes,
+          ...listeners,
+        })
+      )}
     </div>
   );
 }

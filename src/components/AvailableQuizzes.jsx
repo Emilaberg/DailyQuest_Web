@@ -51,7 +51,7 @@ const AvailableQuizzes = () => {
       <div className="p-4 flex items-center justify-center text-lavender">
         <h1>Dashboard Details</h1>
       </div>
-      <div className="text-4xl flex items-center justify-center border-b-2 border-white">
+      <div className="text-4xl flex items-center justify-center border-b-2 border-adminLightSlateGray">
         <h1>Available Quizzes</h1>
       </div>
 
@@ -100,7 +100,7 @@ const AvailableQuizzes = () => {
           ${
             selectedIndex !== null ? "bg-gradient-primary" : "bg-midnightBlue"
           }`}
-          >
+        >
           Action
         </button>
       </div>
