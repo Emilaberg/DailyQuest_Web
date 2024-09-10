@@ -1,8 +1,10 @@
 import { useState } from "react";
 import NavLinks from "./NavLinks";
+
 import { Link, useNavigate } from "react-router-dom";
 function Navbar() {
   const Navigate = useNavigate();
+
   const [hamburgerClick, setHamburgerClick] = useState(false);
 
   return (
@@ -20,7 +22,6 @@ function Navbar() {
         </Link>
 
         <NavLinks />
-
         <div className="md:hidden">
           <img
             src="..\src\assets\icons\hamburger_menu.svg"
