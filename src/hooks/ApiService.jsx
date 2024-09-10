@@ -41,7 +41,12 @@ function ApiService() {
     return data;
   }
 
-  return { getAllQuiz, getAllAnswer, getQuizbyId };
+  async function getAllMetaTags() {
+    var data = await apicaller("MetaTag");
+    return data;
+  }
+
+  return { getAllQuiz, getAllAnswer, getQuizbyId, getAllMetaTags };
 }
 
 export default ApiService;

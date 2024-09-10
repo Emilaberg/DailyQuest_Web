@@ -18,6 +18,8 @@ import AdminLoginOverlay from "./components/AdminLoginOverlay.jsx";
 //loaders
 import { loader as adminLoader } from "./routes/rootAdmin.jsx";
 import { loader as homePageLoader } from "./pages/HomePage.jsx";
+import FaqPage from "./pages/FaqPage.jsx";
+import ReportForm from "./routes/ReportForm.jsx";
 
 const router = createBrowserRouter([
   //routes för gamepage
@@ -37,6 +39,10 @@ const router = createBrowserRouter([
           {
             path: "games/:game",
             element: <GamePage />,
+          },
+          {
+            path: "frequently-asked-questions",
+            element: <FaqPage />,
           },
         ],
       },
