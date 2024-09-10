@@ -3,6 +3,7 @@ import dashboard from "../assets/icons/dashboard.svg";
 import plusSolid from "../assets/icons/plus-solid 1.svg";
 import mail from "../assets/icons/mail.svg";
 import logout from "../assets/icons/logout.svg";
+import { Link } from "react-router-dom";
 
 function SideBar({ isOpen }) {
   return (

@@ -27,6 +27,9 @@ import TrackedEmails from "./components/TrackedEmails.jsx";
 import AvailableQuizzes from "./components/AvailableQuizzes.jsx";
 import AddQuiz from "./components/AddQuiz.jsx";
 import AdminStatistics from "./components/AdminStatistics.jsx";
+import FaqPage from "./pages/FaqPage.jsx";
+import ReportForm from "./routes/ReportForm.jsx";
+
 
 const router = createBrowserRouter([
   //routes för gamepage
@@ -46,6 +49,10 @@ const router = createBrowserRouter([
           {
             path: "games/:game",
             element: <GamePage />,
+          },
+          {
+            path: "frequently-asked-questions",
+            element: <FaqPage />,
           },
         ],
       },

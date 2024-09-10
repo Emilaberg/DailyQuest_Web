@@ -5,7 +5,7 @@ function GameCard({ imageUrl, gameName }) {
   return (
     <>
       <Link
-        className="cursor-pointer transition-transform transform hover:scale-105 duration-300 ease-in-out hover:border-b-4 border-primaryblue"
+        className="cursor-pointer transition-transform transform hover:scale-105 duration-300 ease-in-out border-b-4 border-transparent hover:border-primaryblue"
         to={`/games/${game}`}
         state={{ quizId: 1 }}
       >
