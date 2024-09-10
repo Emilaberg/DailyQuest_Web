@@ -32,10 +32,6 @@ import TrackedEmails from "./components/TrackedEmails.jsx";
 import AvailableQuizzes from "./components/AvailableQuizzes.jsx";
 import AddQuiz from "./components/AddQuiz.jsx";
 import AdminStatistics from "./components/AdminStatistics.jsx";
-import FaqPage from "./pages/FaqPage.jsx";
-import ReportForm from "./routes/ReportForm.jsx";
-
-
 
 const router = createBrowserRouter([
   //routes för gamepage
@@ -85,7 +81,12 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="dashboard/admin-statistics" replace />,
+        element: (
+          <Navigate
+            to="dashboard/admin-statistics"
+            replace
+          />
+        ),
       },
       {
         path: "dashboard",
