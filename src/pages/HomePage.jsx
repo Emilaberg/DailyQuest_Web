@@ -7,7 +7,9 @@ import BrowseAll from "../components/BrowseAll";
 import HelpingHand from "../components/HelpingHand";
 import RecentlyAdded from "../components/RecentlyAdded";
 import { useLoaderData } from "react-router-dom";
-import CookieConsent from "../components/CookieConsent.jsx"; // Ensure this import path is correct
+
+import CookieConsent from "../components/CookieConsent";
+
 
 // Fetch data
 export async function loader() {
@@ -27,9 +29,11 @@ function HomePage() {
 
   return (
     <>
-      <div className="bg-[url('../assets/backgrounds/landing_page_blob.svg')] bg-no-repeat bg-center bg-cover">
-        <CookieConsent /> {/* Make sure this is rendering */}
-        <section className="flex items-center justify-center min-h-screen">
+
+      <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+        <CookieConsent /> {}
+        <section className="flex items-center justify-center min-h-screen ">
+
           <Welcome />
         </section>
         <section className="flex items-center justify-center lg:-mt-52 lg:mb-72 lg:mx-72">
