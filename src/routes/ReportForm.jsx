@@ -45,7 +45,7 @@ function ReportForm() {
                   </div>
                   <a className="text-[#007bff] text-sm ml-4">
                     <small className="block">Mail</small>
-                    <strong>info@example.com</strong>
+                    <strong>issue@dailyquest.com</strong>
                   </a>
                 </li>
               </ul>

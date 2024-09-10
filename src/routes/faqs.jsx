@@ -63,7 +63,7 @@ function faqs() {
           {/* hidden item/content */}
           <div className="opacity-0 max-h-0 overflow-hidden text-white transition-all ease-in-out duration-500">
             <div>
-              <p className="py-2 pl-4 font-bold text-lightSlateGray">
+              <p className="py-2 pl-4 font-semibold text-slate-200">
                 This question addresses the variety of content available. Users
                 want to know if the quizzes cover different genres, such as
                 general gaming knowledge, specific game franchises, or even
