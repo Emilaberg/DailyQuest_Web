@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
+  const navigate = useNavigate();
   //src/assets/images/mystery-box-with-gifts-concept.jpg
   return (
     <>
@@ -11,7 +14,7 @@ function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
           </h1>
           {buttonText ? (
             <button
-              onClick={() => Navigate(to)}
+              onClick={() => navigate(to)}
               className="bg-primaryblue px-3 py-1 rounded-lg text-white w-fit hover:bg-midnightBlue_V2 transition-colors ease-in duration-200"
             >
               {buttonText}

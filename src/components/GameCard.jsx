@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 
-function GameCard({ imageUrl, gameName }) {
+function GameCard({ imageUrl, gameName, quizId }) {
   const game = "world-of-warcraft";
   return (
     <>
       <Link
         className="cursor-pointer transition-transform transform hover:scale-105 duration-300 ease-in-out border-b-4 border-transparent hover:border-primaryblue"
-        to={`/games/${game}`}
-        state={{ quizId: 1 }}
+        to={`/games/${quizId}`}
       >
         <div className="flex flex-col justify-end ">
           <img

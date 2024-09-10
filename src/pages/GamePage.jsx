@@ -1,11 +1,16 @@
 import QuizComponent from "../components/QuizComponent";
 import Navbar from "../components/Navbar";
 import TodaysQuest from "../components/Todaysquest";
+import BannerComponent from "../components/BannerComponent";
+import { useLoaderData, useLocation, useParams } from "react-router-dom";
+import ApiService from "../hooks/apiService";
 
 //hämta data
 //loaders (om det används) måste returnera något. om det inte ska returnera något, returnera null
-export async function loader() {
-  return null;
+export async function loader({ params }) {
+  const apiCaller = ApiService();
+  const quiz = await apiCaller.getQuizbyId(params.quizId);
+  return { quiz };
 }
 
 //hantera form actions
@@ -15,8 +20,14 @@ export async function action() {
 }
 
 export default function GamePage() {
+  const { quiz } = useLoaderData();
+
   return (
     <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+      <BannerComponent
+        title={quiz.QuizName}
+        imageUrl={quiz.image_url}
+      />
       <section className="mx-auto text-white mb-32 w-2/3">
         <h1 className="text-5xl text-center">THE GAME NAME</h1>
 

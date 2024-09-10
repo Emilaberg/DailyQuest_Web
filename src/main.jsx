@@ -21,6 +21,7 @@ import { action as reportAction } from "./routes/ReportForm.jsx";
 //loaders
 import { loader as adminLoader } from "./routes/rootAdmin.jsx";
 import { loader as homePageLoader } from "./pages/HomePage.jsx";
+import { loader as gamePageLoader } from "./pages/GamePage.jsx";
 
 const router = createBrowserRouter([
   //routes för gamepage
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
           {
             path: "games/:game",
             element: <GamePage />,
+            loader: gamePageLoader,
           },
           {
             path: "frequently-asked-questions",
