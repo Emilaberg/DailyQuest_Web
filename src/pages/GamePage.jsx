@@ -26,11 +26,7 @@ export default function GamePage() {
   const [quizQuestions, setQuizQuestions] = useState(
     quiz.quizQuestions.$values
   );
-  const [currentQuestion, setCurrentQuestion] = useState(
-    quiz.quizQuestions.$values[1]
-  );
 
-  console.log(quiz);
   return (
     <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
       <BannerComponent
@@ -77,7 +73,7 @@ export default function GamePage() {
       </section>
 
       <section className="min-h-screen">
-        <QuizComponent currentQuestion={currentQuestion} />
+        <QuizComponent quizQuestions={quizQuestions} />
       </section>
     </div>
   );
