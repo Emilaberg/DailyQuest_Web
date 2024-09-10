@@ -15,7 +15,7 @@ export async function action() {
 }
 
 export default function AdminPage() {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   return (
     <>
@@ -28,12 +28,12 @@ export default function AdminPage() {
         {/* Main Content Holders */}
         <div
           className={`flex-grow transition-all duration-300 ${
-            isSidebarOpen ? "ml-10" : "-ml-64"
+            isSidebarOpen ? "-ml-64 md:ml-0" : "-ml-64 md:-ml-64"
           }`}
         >
           {/* Hamburger Menu for smaller screens */}
           <button
-            className="p-2.5 z-50 top-0 left-6 border border-lavender bg-adminGray text-lavender rounded absolute"
+            className="p-2.5 z-50 top-0 left-6 border border-lavender bg-adminGray text-lavender rounded absolute md:invisible"
             onClick={() => setSidebarOpen(!isSidebarOpen)}
           >
             {/* Hamburger icon */}
