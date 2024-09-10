@@ -1,8 +1,9 @@
-// src/utils/checkConsentStatus.js
+//src / utils / CheckConsentStatus.js;
 export const checkCookieConsent = () => {
   return localStorage.getItem("cookieConsent");
 };
 
+//CookieConsent.jsx;
 import React, { useState, useEffect } from "react";
 
 const CookieConsent = () => {
