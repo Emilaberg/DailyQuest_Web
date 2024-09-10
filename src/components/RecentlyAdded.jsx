@@ -10,10 +10,10 @@ function RecentlyAdded() {
   useEffect(() => {
     async function fetchRecentQuiz() {
       var response = await apiService.getAllQuiz();
-      if (response.$values === 0) {
+      if (response.data.$values === 0) {
         setFetchError(true);
       } else {
-        const latestQuizzes = response.$values.slice(-3);
+        const latestQuizzes = response.data.$values.slice(-3);
         setQuizzes(latestQuizzes);
       }
     }
@@ -34,7 +34,10 @@ function RecentlyAdded() {
             </div>
           ) : (
             quizzes.map((quiz, index) => (
-              <GradiantButton buttonText={quiz.quizName} key={index} />
+              <GradiantButton
+                buttonText={quiz.quizName}
+                key={index}
+              />
             ))
           )}
         </div>

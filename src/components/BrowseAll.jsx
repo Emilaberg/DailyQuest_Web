@@ -15,7 +15,7 @@ function BrowseAll() {
       if (response.$values === 0) {
         setFetchError(true);
       } else {
-        setQuizzes(response.$values);
+        setQuizzes(response.data.$values);
       }
     }
     fetchQuizzes();
