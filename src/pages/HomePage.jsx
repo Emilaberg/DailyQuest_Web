@@ -7,6 +7,7 @@ import BrowseAll from "../components/BrowseAll";
 import HelpingHand from "../components/HelpingHand";
 import RecentlyAdded from "../components/RecentlyAdded";
 import { useLoaderData } from "react-router-dom";
+import CookieConsent from "../components/CookieConsent"; // Make sure the import path is correct
 
 //hämta data
 //loaders (om det används) måste returnera något. om det inte ska returnera något, returnera null
@@ -29,6 +30,7 @@ function HomePage() {
   return (
     <>
       <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+        <CookieConsent /> {/* Add the CookieConsent component here */}
         <section className="flex items-center justify-center min-h-screen ">
           <Welcome />
         </section>
@@ -55,4 +57,5 @@ function HomePage() {
     </>
   );
 }
+
 export default HomePage;
