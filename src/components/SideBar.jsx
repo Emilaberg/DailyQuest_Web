@@ -13,8 +13,15 @@ function SideBar({ isOpen }) {
       style={{ transform: `translateX(${isOpen ? "23.5%" : "-150%"})` }}
     >
       <div className="p-4 flex items-center bg-gradient-primary">
-        <Link to="admin-statistics" className="flex items-center">
-          <img src={dashboard} alt="Dashboard" className="w-7 h-7 mr-2 ml-3" />
+        <Link
+          to="admin-statistics"
+          className="flex items-center"
+        >
+          <img
+            src={dashboard}
+            alt="Dashboard"
+            className="w-7 h-7 mr-2 ml-3"
+          />
           DashBoard
         </Link>
       </div>
@@ -27,7 +34,11 @@ function SideBar({ isOpen }) {
               to="add-quiz"
               className="hover:text-gray-300 flex items-center"
             >
-              <img src={plusSolid} alt="Create Quiz" className="w-7 h-7 mr-2" />
+              <img
+                src={plusSolid}
+                alt="Create Quiz"
+                className="w-7 h-7 mr-2"
+              />
               Create Quiz
             </Link>
           </li>
@@ -36,13 +47,24 @@ function SideBar({ isOpen }) {
               to="tracked-emails"
               className="hover:text-gray-300 flex items-center"
             >
-              <img src={mail} alt="Emails" className="w-7 h-7 mr-2" />
+              <img
+                src={mail}
+                alt="Emails"
+                className="w-7 h-7 mr-2"
+              />
               Emails
             </Link>
           </li>
           <li className="mb-2 flex items-center ml-3 mt-6">
-            <a href="#" className="hover:text-gray-300 flex items-center">
-              <img src={logout} alt="Logout" className="w-7 h-7 mr-2" />
+            <a
+              href="#"
+              className="hover:text-gray-300 flex items-center"
+            >
+              <img
+                src={logout}
+                alt="Logout"
+                className="w-7 h-7 mr-2"
+              />
               Logout
             </a>
           </li>

@@ -17,12 +17,17 @@ import HomePage from "./pages/HomePage.jsx";
 import GamePage from "./pages/GamePage.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
 import AdminLoginOverlay from "./components/AdminLoginOverlay.jsx";
+import FaqPage from "./pages/FaqPage.jsx";
+import ReportForm from "./routes/ReportForm.jsx";
+import Faqs from "./routes/faqs.jsx";
 
 //actions
-
+import { action as reportAction } from "./routes/ReportForm.jsx";
 //loaders
 import { loader as adminLoader } from "./routes/rootAdmin.jsx";
 import { loader as homePageLoader } from "./pages/HomePage.jsx";
+import { loader as gamePageLoader } from "./pages/GamePage.jsx";
+
 import TrackedEmails from "./components/TrackedEmails.jsx";
 import AvailableQuizzes from "./components/AvailableQuizzes.jsx";
 import AddQuiz from "./components/AddQuiz.jsx";
@@ -46,6 +51,22 @@ const router = createBrowserRouter([
           {
             path: "games/:game",
             element: <GamePage />,
+            loader: gamePageLoader,
+          },
+          {
+            path: "frequently-asked-questions",
+            element: <FaqPage />,
+            children: [
+              {
+                index: true,
+                element: <Faqs />,
+              },
+              {
+                path: "Report-issue",
+                element: <ReportForm />,
+                action: reportAction,
+              },
+            ],
           },
         ],
       },
@@ -60,7 +81,12 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="dashboard/admin-statistics" replace />,
+        element: (
+          <Navigate
+            to="dashboard/admin-statistics"
+            replace
+          />
+        ),
       },
       {
         path: "dashboard",
