@@ -21,7 +21,7 @@ function Navbar() {
           />
         </Link>
 
-
+        <NavLinks />
         <div className="md:hidden">
           <img
             src="..\src\assets\icons\hamburger_menu.svg"
