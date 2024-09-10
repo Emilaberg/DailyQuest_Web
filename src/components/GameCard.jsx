@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 function GameCard({ imageUrl, gameName, quizId }) {
-  const game = "world-of-warcraft";
   return (
     <>
       <Link

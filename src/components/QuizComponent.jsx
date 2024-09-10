@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import ApiService from "../hooks/apiService";
 import { useLocation } from "react-router-dom";
 import AnswerContainer from "./AnswerContainer";
-function QuizComponent() {
+function QuizComponent({ currentQuestion }) {
   const apiService = ApiService();
-  const [quiz, setQuiz] = useState([]);
-  const [questions, setQuestions] = useState([]);
 
   //answerprops
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -17,7 +15,7 @@ function QuizComponent() {
 
   //för att styra om det finns en bild från db eller inte, detta ersätts sedan med image variabeln för varje question
   // const image = "../src/assets/images/zeldaChillin.png";
-  const image = "../src/assets/images/cards/Super_mario.png";
+  const image = currentQuestion.question.image;
   // const image = "";
   const styles = "mx-auto object-contain object-center";
 

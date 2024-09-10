@@ -4,11 +4,13 @@ import TodaysQuest from "../components/Todaysquest";
 import BannerComponent from "../components/BannerComponent";
 import { useLoaderData, useLocation, useParams } from "react-router-dom";
 import ApiService from "../hooks/apiService";
+import { useEffect, useState } from "react";
 
 //hämta data
 //loaders (om det används) måste returnera något. om det inte ska returnera något, returnera null
 export async function loader({ params }) {
   const apiCaller = ApiService();
+  console.log(params);
   const quiz = await apiCaller.getQuizbyId(params.quizId);
   return { quiz };
 }
@@ -21,7 +23,14 @@ export async function action() {
 
 export default function GamePage() {
   const { quiz } = useLoaderData();
+  const [quizQuestions, setQuizQuestions] = useState(
+    quiz.quizQuestions.$values
+  );
+  const [currentQuestion, setCurrentQuestion] = useState(
+    quiz.quizQuestions.$values[1]
+  );
 
+  console.log(quizQuestions);
   return (
     <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
       <BannerComponent
@@ -68,7 +77,7 @@ export default function GamePage() {
         />
       </section>
       <section className="min-h-screen">
-        <QuizComponent />
+        <QuizComponent currentQuestion={currentQuestion} />
       </section>
     </div>
   );

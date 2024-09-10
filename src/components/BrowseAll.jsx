@@ -71,7 +71,7 @@ function BrowseAll() {
               filterBrowser.map((quiz, index) => (
                 <GameCard
                   key={index}
-                  imageUrl={"src/assets/images/cards/world-of-warcraft.png"}
+                  imageUrl={quiz.image}
                   gameName={quiz.quizName}
                   quizId={quiz.quizId}
                 />
