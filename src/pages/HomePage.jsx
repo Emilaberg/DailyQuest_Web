@@ -7,6 +7,7 @@ import BrowseAll from "../components/BrowseAll";
 import HelpingHand from "../components/HelpingHand";
 import RecentlyAdded from "../components/RecentlyAdded";
 import { useLoaderData } from "react-router-dom";
+import Newsletter from "../components/NewsletterComponent";
 
 import CookieConsent from "../components/CookieConsent";
 
@@ -24,6 +25,7 @@ export async function action() {
 function HomePage() {
   const apiService = ApiService();
   const variableFromLoader = useLoaderData();
+  const [isOpen, setIsOpen] = useState(false);
 
   console.log(variableFromLoader);
 
