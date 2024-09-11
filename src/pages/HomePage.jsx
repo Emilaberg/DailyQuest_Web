@@ -26,9 +26,6 @@ export async function action() {
 }
 
 function HomePage() {
-  const variableFromLoader = useLoaderData();
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
       <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
