@@ -13,13 +13,13 @@ function QuizComponent({ quizQuestions }) {
 
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
 
-  //get state from route
+  //get state from route (ANVÄNDS INTE)
   let { state } = useLocation();
 
-  //för att styra om det finns en bild från db eller inte, detta ersätts sedan med image variabeln för varje question
+  //för att styra om det finns en bild från db eller inte, detta ersätts sedan med image variabeln för varje question  (ANVÄNDS INTE)
   let image = allQuestions[0].question.image;
-  const [isValid, setIsValid] = useState(true);
-  let styles = "mx-auto object-contain object-center";
+  const [isValid, setIsValid] = useState(true); // (ANVÄNDS INTE)
+  let styles = "mx-auto object-contain object-center"; //  (ANVÄNDS INTE)
 
   useEffect(() => {
     isQuestionAnswered();
@@ -130,7 +130,7 @@ function QuizComponent({ quizQuestions }) {
       <div className="relative w-full px-5 md:w-4/6 lg:w-3/5 xl:w-1/2 md:px-0 mt-20 ">
         <div className="min-w-full min-h-80 max-h-fit ">
           <img
-            className="object-cover w-full"
+            className="z-10 object-cover w-full"
             src={allQuestions[index].question.image}
             alt=""
           />

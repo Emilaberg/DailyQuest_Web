@@ -20,8 +20,11 @@ function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
   return (
     <>
       <section
-        className={`relative flex justify-center items-center w-full h-[384px] bg-[url(${
-          isValid ? imageUrl : "../src/assets/images/Image-missing.jpg"
+        className={`relative flex justify-center items-center w-full h-[384px] ${
+          isValid
+            ? `bg-[url(${imageUrl})]`
+            : `bg-[url(../src/assets/images/Image-missing.jpg)]`
+        }
         })] bg-cover bg-center mb-32`}
       >
         <div className="flex flex-col items-center">
