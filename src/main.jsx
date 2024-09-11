@@ -49,7 +49,7 @@ const router = createBrowserRouter([
             loader: homePageLoader,
           },
           {
-            path: "games/:game",
+            path: "games/:quizId",
             element: <GamePage />,
             loader: gamePageLoader,
           },

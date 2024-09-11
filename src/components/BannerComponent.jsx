@@ -1,12 +1,31 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
   const navigate = useNavigate();
-  //src/assets/images/mystery-box-with-gifts-concept.jpg
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    if (imageUrl == undefined) {
+      setIsValid(false);
+    } else {
+      fetch(imageUrl).then((res) => {
+        console.log(imageUrl);
+        console.log(res);
+        setIsValid(res.status === 200);
+      });
+    }
+  }, []);
+
   return (
     <>
       <section
-        className={`relative flex justify-center items-center w-full h-[384px] bg-[url(../${imageUrl})] bg-cover bg-center mb-32`}
+        className={`relative flex justify-center items-center w-full h-[384px] ${
+          isValid
+            ? `bg-[url(${imageUrl})]`
+            : `bg-[url(../src/assets/images/Image-missing.jpg)]`
+        }
+        })] bg-cover bg-center mb-32`}
       >
         <div className="flex flex-col items-center">
           <h1 className="z-20 font-bold text-center text-lightSlateGray text-8xl mb-10">

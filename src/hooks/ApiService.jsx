@@ -1,19 +1,27 @@
 function ApiService() {
   async function apicaller(endpoint, param, body) {
+    let message = {
+      status: null,
+      statusText: null,
+    };
+
     let url = `https://localhost:7174/api/${endpoint}${
       param ? `/${param}` : ""
     }`;
 
-    // let result;
-    // fetch(method, url, body ? body : "")
-    //   .then((data) => data.json())
-    //   .then((result) => {
-    //     return result;
-    //   });
-    // console.log(url);
-    let response = await fetch(url, body);
-    let data = await response.json();
-    return data;
+    try {
+      let response = await fetch(url, body);
+
+      let data;
+      if (response.ok) data = await response.json();
+
+      message.status = response.ok;
+      message.statusText = response.statusText;
+
+      return { data, message };
+    } catch (error) {
+      console.log("server is down ");
+    }
   }
 
   //EXEMPEL FUNKTION
