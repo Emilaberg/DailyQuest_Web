@@ -1,7 +1,15 @@
-function AdminLoginOverlay() {
+import { useNavigate } from "react-router-dom";
+
+function AdminLoginOverlay({ onLogin }) {
+  const navigate = useNavigate();
+
   function login() {
-    return;
+    // Perform login logic (this could involve checking credentials, etc.)
+    // Assuming login is successful:
+    onLogin(); // Call the login handler to set the cookie and state
+    navigate("/admin/dashboard/admin-statistics"); // Redirect to admin-statistics
   }
+
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-black bg-opacity-80">
       <div className="text-adminLightSlateGray w-1/3 flex flex-col items-center gap-20 bg-midnightBlue rounded-xl shadow-around shadow-white ">
