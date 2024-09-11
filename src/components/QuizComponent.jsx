@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import ApiService from "../hooks/apiService";
 import { useLocation } from "react-router-dom";
 import AnswerContainer from "./AnswerContainer";
-function QuizComponent({ quizQuestions }) {
+
+//utils mailfunction
+import mailResultTo from "../Utils/mailToFunction";
+
+function QuizComponent({ quizQuestions, questionTitle }) {
   const [index, setIndex] = useState(0);
   //answerprops
   const [allQuestions, setAllQuestions] = useState(quizQuestions);
@@ -27,7 +31,7 @@ function QuizComponent({ quizQuestions }) {
     // console.log(allQuestions[0].question.answers);
 
     // console.log("load next question");
-    console.log(answeredQuestions);
+    // console.log(answeredQuestions);
   }, [index]);
 
   //sätter den valda frågan som användaren valt.
@@ -71,6 +75,7 @@ function QuizComponent({ quizQuestions }) {
       lockedAnswer:
         allQuestions[index].question.answers.$values[selectedAnswer],
       alternative: selectedAnswer,
+      title: allQuestions[index].question.question,
     };
 
     setAnsweredQuestions((oldAnswers) => [...oldAnswers, answerObject]);
@@ -91,7 +96,6 @@ function QuizComponent({ quizQuestions }) {
         }
       }
     });
-    console.log(index);
   }
 
   //reset to previous questions
@@ -121,8 +125,50 @@ function QuizComponent({ quizQuestions }) {
     setIndex(index + 1);
   }
 
+  const [emailResultString, setEmailResultString] = useState("send result");
+  const [finalResult, setFinalResult] = useState([]);
+  function sendEmailResult() {
+    //skapa ett result objekt med rätt data sen stringifya detta till
+
+    console.log(answeredQuestions);
+    let resultObject = {
+      questionId: null,
+      answer: "",
+      correctlyAnswered: false,
+    };
+
+    let finalResult = [];
+    answeredQuestions.forEach((question) => {
+      resultObject.questionId = question.questionId;
+      resultObject.answer = question.lockedAnswer.answer;
+      resultObject.title = question.title;
+
+      setFinalResult((oldResult) => [...oldResult, resultObject]);
+
+      resultObject.answer = "";
+      resultObject.correctlyAnswered = false;
+      resultObject.questionId = null;
+    });
+
+    console.log(finalResult);
+
+    const resultsToString = JSON.stringify(finalResult, null, 2);
+    const resultsTitle = questionTitle;
+
+    mailResultTo("DailyQuest@mail.com", resultsTitle, resultsToString);
+    setEmailResultString("send email again");
+  }
+
   return (
     <div className="flex flex-col items-center justify-center">
+      <div>
+        <button
+          className="text-white"
+          onClick={sendEmailResult}
+        >
+          {emailResultString}
+        </button>
+      </div>
       <span className="text-white">
         {index + 1} / {allQuestions.length}
       </span>

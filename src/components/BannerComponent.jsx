@@ -10,8 +10,6 @@ function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
       setIsValid(false);
     } else {
       fetch(imageUrl).then((res) => {
-        console.log(imageUrl);
-        console.log(res);
         setIsValid(res.status === 200);
       });
     }

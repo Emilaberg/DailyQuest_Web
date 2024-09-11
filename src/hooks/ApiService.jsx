@@ -1,5 +1,5 @@
 function ApiService() {
-  async function apicaller(endpoint, param, body) {
+  async function apicaller(endpoint, content, param) {
     let message = {
       status: null,
       statusText: null,
@@ -10,8 +10,7 @@ function ApiService() {
     }`;
 
     try {
-      let response = await fetch(url, body);
-
+      let response = await fetch(url, content);
       let data;
       if (response.ok) data = await response.json();
 
@@ -37,11 +36,25 @@ function ApiService() {
 
     return data;
   }
-  async function createReport(formData) {
+  async function createReport(data) {
     //formData är ett objekt med values.
     // var data = await apicaller("Report");
+    let now = new Date().toISOString();
 
-    return "ok";
+    let content = {
+      method: "POST",
+      body: JSON.stringify({
+        email: data.Email,
+        message: data.Message,
+        subject: data.Subject,
+        timeStamp: now,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    // await apicaller("Ticket", content, "emil");
+    await fetch("https://localhost:7174/api/Ticket/emil", content);
   }
 
   async function getQuizbyId(id) {
