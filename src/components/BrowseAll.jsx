@@ -67,7 +67,7 @@ function BrowseAll() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2  md:grid-cols-3 xl:gap-6">
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-3 xl:gap-6">
             {/* Error message if tags are empty */}
             {fetchError && (
               <div className="text-white font-bold text-xl col-span-full pt-10">
@@ -78,7 +78,7 @@ function BrowseAll() {
               filterBrowser.map((quiz, index) => (
                 <GameCard
                   key={index}
-                  imageUrl={quiz.image}
+                  imageUrl={quiz.imageUrl}
                   gameName={quiz.quizName}
                   quizId={quiz.quizId}
                 />
