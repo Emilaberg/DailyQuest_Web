@@ -4,21 +4,41 @@ import { useState, useEffect } from "react";
 
 function RecentlyAdded() {
   const [quizzes, setQuizzes] = useState([]);
-  const [fetchError, setFetchError] = useState(false);
+  const [fetchError, setFetchError] = useState(null);
   const apiService = ApiService();
 
   useEffect(() => {
     async function fetchRecentQuiz() {
-      var response = await apiService.getAllQuiz();
-      if (response.$values === 0) {
-        setFetchError(true);
-      } else {
-        const latestQuizzes = response.$values.slice(-3);
-        setQuizzes(latestQuizzes);
+      try {
+        var response = await apiService.getAllQuiz();
+
+        if (response.data.$values && response.data.$values.length > 0) {
+          setQuizzes(response.data.$values.slice(-3));
+          setFetchError(null);
+        } else {
+          setFetchError("No quiz found");
+        }
+      } catch (error) {
+        setFetchError("Something went wrong!");
+        console.error("Error fetching all quiz", error);
       }
     }
     fetchRecentQuiz();
   }, []);
+
+  // useEffect(() => {
+  //   async function fetchRecentQuiz() {
+  //     var response = await apiService.getAllQuiz();
+  //     if (response.$values === 0) {
+  //       setFetchError(true);
+  //     } else {
+  //       const latestQuizzes = response.$values.slice(-3);
+  //       setQuizzes(latestQuizzes);
+  //     }
+  //   }
+  //   fetchRecentQuiz();
+  // }, []);
+
   return (
     <>
       <div>
@@ -28,15 +48,18 @@ function RecentlyAdded() {
           </h1>
         </div>
         <div className=" flex flex-row justify-between md:gap-4 lg:gap-10 xl:gap-16 ">
-          {fetchError == true ? (
+          {fetchError && (
             <div className="text-white font-bold text-xl col-span-full pt-10">
               Failed to fetch. Please try again later.
             </div>
-          ) : (
-            quizzes.map((quiz, index) => (
-              <GradiantButton buttonText={quiz.quizName} key={index} />
-            ))
           )}
+          {!fetchError &&
+            quizzes.map((quiz, index) => (
+              <GradiantButton
+                buttonText={quiz.quizName}
+                key={index}
+              />
+            ))}
         </div>
       </div>
     </>

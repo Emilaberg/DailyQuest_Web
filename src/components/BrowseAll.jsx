@@ -6,16 +6,23 @@ function BrowseAll() {
   const apiService = ApiService();
   const [quizzes, setQuizzes] = useState([]);
   const [searchWord, setSearchWord] = useState("");
-  const [fetchError, setFetchError] = useState(false);
+  const [fetchError, setFetchError] = useState(null);
 
   useEffect(() => {
     async function fetchQuizzes() {
-      var response = await apiService.getAllQuiz();
-      console.log(response);
-      if (response.$values === 0) {
-        setFetchError(true);
-      } else {
-        setQuizzes(response.$values);
+      try {
+        const response = await apiService.getAllQuiz();
+
+        if (response.data.$values && response.data.$values.length > 0) {
+          setQuizzes(response.data.$values);
+          setFetchError(null);
+        } else {
+          setFetchError("No quizzes found");
+        }
+      } catch (error) {
+        setFetchError("Something went wrong!");
+        // console.log(response.message);
+        console.error("Error fetching all quiz", error);
       }
     }
     fetchQuizzes();
@@ -60,23 +67,22 @@ function BrowseAll() {
               </div>
             </div>
           </div>
-          {/* className="absolute right-0 mr-2 px-4 py-1 text-white bg-primaryblue rounded-md hover:bg-oceanBlue" */}
           <div className="grid grid-cols-2 gap-2  md:grid-cols-3 xl:gap-6">
             {/* Error message if tags are empty */}
-            {fetchError == true ? (
+            {fetchError && (
               <div className="text-white font-bold text-xl col-span-full pt-10">
                 Failed to fetch quiz. Please try again later.
               </div>
-            ) : (
+            )}
+            {!fetchError &&
               filterBrowser.map((quiz, index) => (
                 <GameCard
                   key={index}
-                  imageUrl={"src/assets/images/cards/world-of-warcraft.png"}
+                  imageUrl={quiz.image}
                   gameName={quiz.quizName}
                   quizId={quiz.quizId}
                 />
-              ))
-            )}
+              ))}
           </div>
         </div>
       </div>
