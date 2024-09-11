@@ -13,14 +13,15 @@ function BrowseAll() {
       try {
         const response = await apiService.getAllQuiz();
 
-        if (response.$values && response.$values.length > 0) {
-          setQuizzes(response.$values);
+        if (response.data.$values && response.data.$values.length > 0) {
+          setQuizzes(response.data.$values);
           setFetchError(null);
         } else {
           setFetchError("No quizzes found");
         }
       } catch (error) {
         setFetchError("Something went wrong!");
+        // console.log(response.message);
         console.error("Error fetching all quiz", error);
       }
     }

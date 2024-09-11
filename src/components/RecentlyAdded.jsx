@@ -12,8 +12,8 @@ function RecentlyAdded() {
       try {
         var response = await apiService.getAllQuiz();
 
-        if (response.$values && response.$values.length > 0) {
-          setQuizzes(response.$values.slice(-3));
+        if (response.data.$values && response.data.$values.length > 0) {
+          setQuizzes(response.data.$values.slice(-3));
           setFetchError(null);
         } else {
           setFetchError("No quiz found");
@@ -55,7 +55,10 @@ function RecentlyAdded() {
           )}
           {!fetchError &&
             quizzes.map((quiz, index) => (
-              <GradiantButton buttonText={quiz.quizName} key={index} />
+              <GradiantButton
+                buttonText={quiz.quizName}
+                key={index}
+              />
             ))}
         </div>
       </div>
