@@ -8,7 +8,11 @@ export async function action({ request, params }) {
   const updates = Object.fromEntries(formData);
 
   let response = await apiCaller.createReport(updates);
-  alert("Report succesfully submitted");
+  if (response) {
+    alert("Report succesfully submitted");
+  } else {
+    alert("something went wrong submitting the form, try again");
+  }
 
   return redirect("/frequently-asked-questions");
 }

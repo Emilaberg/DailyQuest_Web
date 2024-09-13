@@ -54,7 +54,13 @@ function ApiService() {
       },
     };
     // await apicaller("Ticket", content, "emil");
-    await fetch("https://localhost:7174/api/Ticket/emil", content);
+
+    try {
+      await fetch("https://localhost:7174/api/Ticket/emil", content);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   async function getQuizbyId(id) {
