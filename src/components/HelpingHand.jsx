@@ -1,8 +1,6 @@
 import { useLoaderData, Link } from "react-router-dom";
 
 function HelpingHand() {
-  const variableFromLoader = useLoaderData();
-  console.log(variableFromLoader);
   return (
     <>
       <div className="w-full h-48 mt-14 mr-1 ml-1">
