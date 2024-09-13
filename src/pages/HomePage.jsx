@@ -47,7 +47,7 @@ function HomePage() {
           id="games"
           className="flex items-center justify-center  lg:my-36 lg:mx-16"
         >
-          <BrowseAll />
+          <BrowseAll limit={6} />
         </section>
         <section className="flex items-center justify-center lg:my-72 lg:mx-72">
           <HelpingHand />

@@ -33,8 +33,16 @@ function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
           "relative flex justify-center items-center w-full h-[384px] bg-cover bg-center mb-32 "
         }
       >
+<<<<<<< johannes-dev
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+
+        <div className=" relative flex flex-col items-center z-10">
+          <h1 className=" font-bold text-center text-lightSlateGray text-8xl mb-10">
+=======
         <div className="flex flex-col items-center">
           <h1 className="z-20 font-bold text-center text-lightSlateGray text-8xl mb-10 text-shadow-2xl">
+>>>>>>> dev
             {title}
           </h1>
           {buttonText ? (

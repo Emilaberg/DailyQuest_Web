@@ -1,20 +1,25 @@
+// Imports
 import GameCard from "./GameCard";
 import ApiService from "../hooks/apiService";
 import { useState, useEffect } from "react";
 
-function BrowseAll() {
+function BrowseAll({ limit }) {
+  // States
   const apiService = ApiService();
   const [quizzes, setQuizzes] = useState([]);
   const [searchWord, setSearchWord] = useState("");
   const [fetchError, setFetchError] = useState(null);
-
+  // Use-effects
   useEffect(() => {
     async function fetchQuizzes() {
       try {
         const response = await apiService.getAllQuiz();
 
         if (response.data.$values && response.data.$values.length > 0) {
-          setQuizzes(response.data.$values.slice(0, 6));
+          const quizData = limit
+            ? response.data.$values.slice(0, limit)
+            : response.data.$values;
+          setQuizzes(quizData);
           setFetchError(null);
         } else {
           setFetchError("fetch failed");
@@ -31,7 +36,7 @@ function BrowseAll() {
   const filterBrowser = quizzes.filter((quiz) =>
     quiz.quizName.toLowerCase().includes(searchWord.toLowerCase())
   );
-
+  // Elements
   return (
     <>
       <div
