@@ -29,7 +29,10 @@ export default function GamePage() {
 
   return (
     <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
-      <BannerComponent title={quiz.quizName} imageUrl={quiz.image_url} />
+      <BannerComponent
+        title={quiz.quizName}
+        imageUrl={quiz.imageUrl}
+      />
       <section className="flex items-center justify-center lg:mx-72 my-10">
         <TodaysQuest
           imageUrl={"../src/assets/images/Image-missing.jpg"}
@@ -72,7 +75,10 @@ export default function GamePage() {
       </section>
 
       <section className="min-h-screen">
-        <QuizComponent quizQuestions={quizQuestions} />
+        <QuizComponent
+          quizQuestions={quizQuestions}
+          questionTitle={quiz.quizName}
+        />
       </section>
     </div>
   );
