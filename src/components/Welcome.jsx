@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Welcome() {
   return (
     <>
@@ -17,11 +19,13 @@ function Welcome() {
         <h2 className="text-white text-2xl font-bold opacity-85">
           and MANY more...
         </h2>
-        <div className="flex justify-center items-center text-white mt-10 text-lg min-h-[50px] min-w-[151px] text-center rounded-[10px] bg-gradient-border cursor-pointer">
-          <div className="flex items-center justify-center h-[46px] w-[147px] bg-midnightBlue rounded-[8px] hover:bg-transparent transition-all ease-in duration-150 ">
-            <h3 className="text-center">Browse quizzes</h3>
+        <a href="#browse-games">
+          <div className="flex justify-center items-center text-white mt-10 text-lg min-h-[50px] min-w-[151px] text-center rounded-[10px] bg-gradient-border cursor-pointer">
+            <div className="flex items-center justify-center h-[46px] w-[147px] bg-midnightBlue rounded-[8px] hover:bg-transparent transition-all ease-in duration-150 ">
+              <h3 className="text-center">Browse quizzes</h3>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </>
   );

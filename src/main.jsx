@@ -27,11 +27,13 @@ import { action as reportAction } from "./routes/ReportForm.jsx";
 import { loader as adminLoader } from "./routes/rootAdmin.jsx";
 import { loader as homePageLoader } from "./pages/HomePage.jsx";
 import { loader as gamePageLoader } from "./pages/GamePage.jsx";
+import { loader as browseGamesPageLoader } from "./pages/BrowseGamesPage.jsx";
 
 import TrackedEmails from "./components/TrackedEmails.jsx";
 import AvailableQuizzes from "./components/AvailableQuizzes.jsx";
 import AddQuiz from "./components/AddQuiz.jsx";
 import AdminStatistics from "./components/AdminStatistics.jsx";
+import BrowseGamesPage from "./pages/BrowseGamesPage.jsx";
 
 const router = createBrowserRouter([
   //routes för gamepage
@@ -67,6 +69,11 @@ const router = createBrowserRouter([
                 action: reportAction,
               },
             ],
+          },
+          {
+            path: "browse-games",
+            element: <BrowseGamesPage />,
+            loader: browseGamesPageLoader,
           },
         ],
       },
