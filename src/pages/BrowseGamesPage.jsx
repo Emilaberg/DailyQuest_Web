@@ -25,7 +25,7 @@ export default function BrowseGamesPage() {
     <>
       <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
         <section className="flex items-center justify-center h-screen">
-          <BrowseAll />
+          <BrowseAll limit={undefined} />
         </section>
       </div>
     </>
