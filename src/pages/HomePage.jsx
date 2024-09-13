@@ -2,7 +2,7 @@ import Welcome from "../components/Welcome";
 import TodaysQuest from "../components/Todaysquest";
 import Navbar from "../components/Navbar";
 import ApiService from "../hooks/apiService";
-import { useEffect, useState } from "react";
+import { Children, useEffect, useState } from "react";
 import BrowseAll from "../components/BrowseAll";
 import HelpingHand from "../components/HelpingHand";
 import RecentlyAdded from "../components/RecentlyAdded";
@@ -16,8 +16,13 @@ export async function loader() {
   //test fetcha data
   const apiService = ApiService();
 
-  const result = apiService.getQuizbyId(1);
-  return "hello from loader";
+  let todaysMixedQuiz = await apiService.getQuizbyId(7);
+  console.log(todaysMixedQuiz.data);
+  if (todaysMixedQuiz.message.status) {
+    return todaysMixedQuiz.data;
+  } else {
+    return "error fetching quiz, check Loader function.";
+  }
 }
 
 // Handle form actions
@@ -26,18 +31,30 @@ export async function action() {
 }
 
 function HomePage() {
+  const todaysMixedQuiz = useLoaderData();
+  // console.log(todaysMixedQuiz);
+
   return (
     <>
-      <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+      <div
+        style={{
+          backgroundImage: `url(../src/assets/backgrounds/landing_page_blob.svg)`,
+        }}
+        className="bg-no-repeat bg-center bg-cover"
+      >
         <CookieConsent /> {}
-        <section className="flex items-center justify-center min-h-screen ">
+        <section className="min-h-screen">
           <Welcome />
         </section>
-        <section className="flex items-center justify-center lg:-mt-52 lg:mb-72 lg:mx-72">
+        <section className="flex flex-col justify-center items-center">
+          <div className="flex w-2/3 h-20 bg-black rounded-2xl mb-32 -translate-y-1/2 text-white">
+            <h1 className="m-auto">SOME TEXT VI KAN HA HÄR; NÅGOT COOLT</h1>
+          </div>
           <TodaysQuest
             textPrompt="HEJSAN"
             imageUrl="src/assets/images/cards/the_legend_of_zelda_breath_of_the_wild_4k-wide-1332745958.jpg"
-            quizName="Todays quest"
+            quizName="Todays Mixed Quiz"
+            quiz={todaysMixedQuiz}
           />
         </section>
         <section className="flex items-center justify-center lg:mx-16">
@@ -49,7 +66,7 @@ function HomePage() {
         >
           <BrowseAll limit={6} />
         </section>
-        <section className="flex items-center justify-center lg:my-72 lg:mx-72">
+        <section className="flex items-center justify-center lg:mt-72 pb-72 lg:mx-72">
           <HelpingHand />
         </section>
       </div>

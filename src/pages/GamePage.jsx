@@ -28,7 +28,12 @@ export default function GamePage() {
   );
 
   return (
-    <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+    <div
+      style={{
+        backgroundImage: `url(../src/assets/backgrounds/landing_page_blob.svg)`,
+      }}
+      className="bg-no-repeat bg-center bg-cover"
+    >
       <BannerComponent
         title={quiz.quizName}
         imageUrl={quiz.imageUrl}
@@ -37,6 +42,7 @@ export default function GamePage() {
         <TodaysQuest
           imageUrl={"../src/assets/images/Image-missing.jpg"}
           textPrompt="THIS IS WHERE AWESOME TEXT SHOULD BE "
+          quiz={quiz}
         />
       </section>
       <section className="mx-auto bg-midnightBlue_V2 px-5 py-2 text-white mb-32 w-2/3">

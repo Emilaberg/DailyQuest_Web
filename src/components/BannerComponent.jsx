@@ -18,7 +18,6 @@ function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
       });
     }
   }, []);
-  console.log(typeof imageUrl);
   return (
     <>
       <section
