@@ -31,7 +31,7 @@ export default function GamePage() {
     <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
       <BannerComponent
         title={quiz.quizName}
-        imageUrl={quiz.image_url}
+        imageUrl={quiz.imageUrl}
       />
       <section className="flex items-center justify-center lg:mx-72 my-10">
         <TodaysQuest
