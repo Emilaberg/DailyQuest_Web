@@ -73,7 +73,10 @@ export default function GamePage() {
       </section>
 
       <section className="min-h-screen">
-        <QuizComponent quizQuestions={quizQuestions} />
+        <QuizComponent
+          quizQuestions={quizQuestions}
+          questionTitle={quiz.quizName}
+        />
       </section>
     </div>
   );
