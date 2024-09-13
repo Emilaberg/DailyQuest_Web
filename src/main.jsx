@@ -87,10 +87,6 @@ const router = createBrowserRouter([
     loader: adminLoader,
     children: [
       {
-        index: true,
-        element: <Navigate to="dashboard/admin-statistics" replace />,
-      },
-      {
         path: "dashboard",
         element: <AdminPage />,
         children: [
