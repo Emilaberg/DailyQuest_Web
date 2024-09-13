@@ -174,22 +174,15 @@ function QuizComponent({ quizQuestions, questionTitle }) {
       </span>
       {/* quiz container */}
       <div className="relative w-full px-5 md:w-4/6 lg:w-3/5 xl:w-1/2 md:px-0 mt-20 ">
-        <div className="min-w-full min-h-80 max-h-fit ">
+        <div className="min-w-full min-h-80 h-[400px] w-full bg-blue-900 bg-opacity-30">
           <img
-            className="z-10 object-cover w-full"
+            className="relative z-10 object-contain w-full max-h-full"
             src={allQuestions[index].question.image}
             alt=""
           />
-          {/* <img
-            className={
-              "z-10 mx-auto object-contain object-center relative"
-            }
-            src="../src/assets/images/cards/No_image_available1.png"
-            alt=""
-          /> */}
           <img
             className={
-              "z-0 mx-auto object-contain object-center absolute top-0 left-1/2 -translate-x-1/2 bg-gray-500"
+              "z-0 mx-auto object-contain w-32 object-center absolute top-1/2 -translate-y-2/3 left-1/2 -translate-x-1/2 bg-gray-500"
             }
             src="../src/assets/images/cards/No_image_available.png"
             alt=""
@@ -248,31 +241,6 @@ function QuizComponent({ quizQuestions, questionTitle }) {
               </div>
             )
           )}
-
-          {/* <div
-            onClick={() => question(2)}
-            className={`${
-              selectedAnswer === 2 ? "bg-primaryblue" : "bg-slateBlue"
-            } py-3 xl:py-5 rounded-2xl text-center cursor-pointer hover:opacity-80 hover:-translate-y-1 transition-all ease-in duration-200`}
-          >
-            zelda
-          </div>
-          <div
-            onClick={() => question(3)}
-            className={`${
-              selectedAnswer === 3 ? "bg-primaryblue" : "bg-slateBlue"
-            } py-3 xl:py-5 rounded-2xl text-center cursor-pointer hover:opacity-80 hover:-translate-y-1 transition-all ease-in duration-200`}
-          >
-            link
-          </div>
-          <div
-            onClick={() => question(4)}
-            className={`${
-              selectedAnswer === 4 ? "bg-primaryblue" : "bg-slateBlue"
-            } py-3 xl:py-5 rounded-2xl text-center cursor-pointer hover:opacity-80 hover:-translate-y-1 transition-all ease-in duration-200`}
-          >
-            nashor
-          </div> */}
         </div>
 
         <div className="text-white mt-3 text-center">

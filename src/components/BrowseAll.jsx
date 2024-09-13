@@ -78,7 +78,7 @@ function BrowseAll() {
               filterBrowser.map((quiz, index) => (
                 <GameCard
                   key={index}
-                  imageUrl={quiz.image}
+                  imageUrl={quiz.imageUrl}
                   gameName={quiz.quizName}
                   quizId={quiz.quizId}
                 />

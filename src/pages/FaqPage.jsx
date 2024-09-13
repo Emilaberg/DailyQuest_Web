@@ -28,7 +28,7 @@ function FaqPage() {
         {/* image section */}
         <BannerComponent
           title={"FAQ PAGE"}
-          imageUrl={"src/assets/images/mystery-box-with-gifts-concept.jpg"}
+          imageUrl={"../src/assets/images/mystery-box-with-gifts-concept.jpg"}
           buttonText={"Report an issue"}
           to={"Report-issue"}
           attribute={"Image by freepik"}
