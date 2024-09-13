@@ -29,10 +29,7 @@ export default function GamePage() {
 
   return (
     <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
-      <BannerComponent
-        title={quiz.quizName}
-        imageUrl={quiz.image_url}
-      />
+      <BannerComponent title={quiz.quizName} imageUrl={quiz.image_url} />
       <section className="flex items-center justify-center lg:mx-72 my-10">
         <TodaysQuest
           imageUrl={"../src/assets/images/Image-missing.jpg"}
@@ -47,14 +44,15 @@ export default function GamePage() {
             What is {quiz.quizName.slice(0, 17)} for game?
           </h2>
           <p className="text-2xl">
-            World of Warcraft (WoW) is a massively multiplayer online
+            {quiz.quizDescription}
+            {/* World of Warcraft (WoW) is a massively multiplayer online
             role-playing game (MMORPG) developed by Blizzard Entertainment. Set
             in the fantasy world of Azeroth, players create characters and
             embark on epic quests, battling monsters, exploring dungeons, and
             engaging in player-versus-player combat. The game is known for its
             rich lore, expansive world, and vibrant community. Players can
             choose from various races and classes, each with unique abilities
-            and storylines, making every adventure unique.
+            and storylines, making every adventure unique. */}
           </p>
 
           <p className="text-2xl mt-10">
@@ -62,12 +60,13 @@ export default function GamePage() {
               {quiz.quizName.slice(0, 17)} Challenge
             </span>
             <br />
-            Test your knowledge of the World of Warcraft universe with this
+            {quiz.quizChallenge}
+            {/* Test your knowledge of the World of Warcraft universe with this
             engaging quiz! This quiz contains 10 questions that cover various
             aspects of the game, including its history, characters, locations,
             and gameplay mechanics. Whether you're a seasoned WoW player or new
             to the game, this quiz will challenge your understanding and provide
-            a fun way to revisit the world of Azeroth.
+            a fun way to revisit the world of Azeroth. */}
           </p>
         </div>
       </section>

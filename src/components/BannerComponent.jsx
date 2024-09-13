@@ -27,8 +27,11 @@ function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
         }
         })] bg-cover bg-center mb-32`}
       >
-        <div className="flex flex-col items-center">
-          <h1 className="z-20 font-bold text-center text-lightSlateGray text-8xl mb-10">
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+
+        <div className=" relative flex flex-col items-center z-10">
+          <h1 className=" font-bold text-center text-lightSlateGray text-8xl mb-10">
             {title}
           </h1>
           {buttonText ? (
