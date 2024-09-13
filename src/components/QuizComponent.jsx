@@ -2,104 +2,199 @@ import { useEffect, useState } from "react";
 import ApiService from "../hooks/apiService";
 import { useLocation } from "react-router-dom";
 import AnswerContainer from "./AnswerContainer";
-function QuizComponent() {
-  const apiService = ApiService();
-  const [quiz, setQuiz] = useState([]);
-  const [questions, setQuestions] = useState([]);
 
+//utils mailfunction
+import mailResultTo from "../Utils/mailToFunction";
+
+function QuizComponent({ quizQuestions, questionTitle }) {
+  const [index, setIndex] = useState(0);
   //answerprops
-  const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [answeredCorrect, setAnsweredCorrect] = useState(false);
-  const [answered, setAnswered] = useState(false);
+  const [allQuestions, setAllQuestions] = useState(quizQuestions);
 
-  //get state from route
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [answeredCorrect, setAnsweredCorrect] = useState(false);
+  const [lockAnswer, setLockAnswer] = useState(false);
+
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+
+  //get state from route (ANVÄNDS INTE)
   let { state } = useLocation();
 
-  //för att styra om det finns en bild från db eller inte, detta ersätts sedan med image variabeln för varje question
-  // const image = "../src/assets/images/zeldaChillin.png";
-  const image = "../src/assets/images/cards/Super_mario.png";
-  // const image = "";
-  const styles = "mx-auto object-contain object-center";
+  //för att styra om det finns en bild från db eller inte, detta ersätts sedan med image variabeln för varje question  (ANVÄNDS INTE)
+  let image = allQuestions[0].question.image;
+  const [isValid, setIsValid] = useState(true); // (ANVÄNDS INTE)
+  let styles = "mx-auto object-contain object-center"; //  (ANVÄNDS INTE)
 
   useEffect(() => {
-    async function fetchData() {
-      var res = await apiService.getQuizbyId(state.quizId);
-      console.log(res);
-      setQuiz(res);
-    }
+    isQuestionAnswered();
+    // console.log(allQuestions);
+    // console.log(allQuestions[0].question.answers);
 
-    // fetchData();
-  }, []);
+    // console.log("load next question");
+    // console.log(answeredQuestions);
+  }, [index]);
 
   //sätter den valda frågan som användaren valt.
-  function question(id) {
-    if (answered) return;
-    switch (id) {
-      case 1:
-        selectedQuestion == 1
-          ? setSelectedQuestion(null)
-          : setSelectedQuestion(1);
+  function question(id, isCorrect) {
+    console.log("answer is " + isCorrect);
 
+    if (lockAnswer) return;
+
+    switch (id) {
+      case 0:
+        selectedAnswer == 0 ? setSelectedAnswer(null) : setSelectedAnswer(0);
+        break;
+
+      case 1:
+        selectedAnswer == 1 ? setSelectedAnswer(null) : setSelectedAnswer(1);
         break;
 
       case 2:
-        selectedQuestion == 2
-          ? setSelectedQuestion(null)
-          : setSelectedQuestion(2);
+        selectedAnswer == 2 ? setSelectedAnswer(null) : setSelectedAnswer(2);
         break;
 
       case 3:
-        selectedQuestion == 3
-          ? setSelectedQuestion(null)
-          : setSelectedQuestion(3);
-        break;
-
-      case 4:
-        selectedQuestion == 4
-          ? setSelectedQuestion(null)
-          : setSelectedQuestion(4);
+        selectedAnswer == 3 ? setSelectedAnswer(null) : setSelectedAnswer(3);
         break;
 
       default:
-        setSelectedQuestion(null);
+        setSelectedAnswer(null);
         break;
     }
+    setAnsweredCorrect(isCorrect);
   }
 
   //sätter att usern har svarat på en fråga och validerar sedan svaret.
   function checkAnswer() {
-    if (selectedQuestion == null) {
+    if (selectedAnswer == null) {
       alert("PICK A FUCKING ANSWER");
       return;
     }
-    setAnswered(true);
-    selectedQuestion === 1
-      ? setAnsweredCorrect(true)
-      : setAnsweredCorrect(false);
+    let answerObject = {
+      questionId: index,
+      lockedAnswer:
+        allQuestions[index].question.answers.$values[selectedAnswer],
+      alternative: selectedAnswer,
+      title: allQuestions[index].question.question,
+    };
+
+    setAnsweredQuestions((oldAnswers) => [...oldAnswers, answerObject]);
+
+    setLockAnswer(true);
+  }
+
+  function isQuestionAnswered() {
+    //om index finns i answered arrayen, då vill jag gå in i if satsen och låsa svaren och sätta svaret till den korrekta, annars returna
+    // if()
+    answeredQuestions.filter((o) => {
+      if (o.questionId == index) {
+        //lås svaren och sätt rätt svar till det av lockedAnswer
+        setSelectedAnswer(o.alternative);
+        setLockAnswer(true);
+        if (o.lockedAnswer.isCorrect) {
+          setAnsweredCorrect(true);
+        }
+      }
+    });
+  }
+
+  //reset to previous questions
+  function loadPrevQuestion() {
+    //logik för att ladda nästa fråga
+    if (index - 1 < 0) {
+      console.log("yes");
+      return;
+    }
+
+    setAnsweredCorrect(false);
+    setSelectedAnswer(null);
+    setLockAnswer(false);
+    setIndex(index - 1);
   }
 
   //återställer alla variabler och laddar nästa fråga
   function loadNextQuestion() {
-    setAnswered(false);
+    if (index + 1 == allQuestions.length) {
+      console.log("yes");
+      return;
+    }
     setAnsweredCorrect(false);
-    setSelectedQuestion(null);
-
+    setSelectedAnswer(null);
+    setLockAnswer(false);
     //logik för att ladda nästa fråga
+    setIndex(index + 1);
   }
+
+  const [emailResultString, setEmailResultString] = useState("send result");
+  const [finalResult, setFinalResult] = useState([]);
+  function sendEmailResult() {
+    //skapa ett result objekt med rätt data sen stringifya detta till
+
+    console.log(answeredQuestions);
+    let resultObject = {
+      questionId: null,
+      answer: "",
+      correctlyAnswered: false,
+    };
+
+    let finalResult = [];
+    answeredQuestions.forEach((question) => {
+      resultObject.questionId = question.questionId;
+      resultObject.answer = question.lockedAnswer.answer;
+      resultObject.title = question.title;
+
+      setFinalResult((oldResult) => [...oldResult, resultObject]);
+
+      resultObject.answer = "";
+      resultObject.correctlyAnswered = false;
+      resultObject.questionId = null;
+    });
+
+    console.log(finalResult);
+
+    const resultsToString = JSON.stringify(finalResult, null, 2);
+    const resultsTitle = questionTitle;
+
+    mailResultTo("DailyQuest@mail.com", resultsTitle, resultsToString);
+    setEmailResultString("send email again");
+  }
+
   return (
     <div className="flex flex-col items-center justify-center">
+      <div>
+        <button
+          className="text-white"
+          onClick={sendEmailResult}
+        >
+          {emailResultString}
+        </button>
+      </div>
+      <span className="text-white">
+        {index + 1} / {allQuestions.length}
+      </span>
       {/* quiz container */}
       <div className="relative w-full px-5 md:w-4/6 lg:w-3/5 xl:w-1/2 md:px-0 mt-20 ">
-        <img
-          className={image ? `w-full` : styles}
-          src={
-            image ? image : "../src/assets/images/cards/No_image_available.png"
-          }
-          alt=""
-        />
+        <div className="min-w-full min-h-80 h-[400px] w-full bg-blue-900 bg-opacity-30">
+          <img
+            className="relative z-10 object-contain w-full max-h-full"
+            src={allQuestions[index].question.image}
+            alt=""
+          />
+          <img
+            className={
+              "z-0 mx-auto object-contain w-32 object-center absolute top-1/2 -translate-y-2/3 left-1/2 -translate-x-1/2 bg-gray-500"
+            }
+            src="../src/assets/images/cards/No_image_available.png"
+            alt=""
+          />
+        </div>
+
         {/* buttons container */}
         <div className="py-4 px-2 md:px-3 w-full flex justify-between items-center bg-slateBlue text-lightSlateGray">
-          <div className="flex flex-col-reverse lg:flex-row lg:min-w-fit items-center cursor-pointer">
+          <div
+            onClick={loadPrevQuestion}
+            className="flex flex-col-reverse lg:flex-row lg:min-w-fit items-center cursor-pointer"
+          >
             <img
               className="scale-50 lg:scale-75 "
               src="..\src\assets\icons\arrow_left.svg"
@@ -111,9 +206,7 @@ function QuizComponent() {
           </div>
           <div className="flex font-semibold items-center text-sm mx-3 md:mx-1 lg:mx-10 lg:text-lg max-w-[calc(screen/3)]">
             <span className="min-w-0">
-              What is the name of this handsome boy of this handsome boy of this
-              handsome boy of this handsome boy of this handsome boy of this
-              handsome boy of this handsome boy
+              {allQuestions[index].question.question}
             </span>
           </div>
           <div
@@ -135,39 +228,21 @@ function QuizComponent() {
       {/* <AnswerContainer /> */}
       <div className="w-full md:w-4/6 lg:w-3/5 xl:w-[45%]">
         <div className="grid grid-cols-2 gap-3 px-5 md:px-0 font-semibold text-lg   xl:text-2xl capitalize  text-white mt-5">
-          <div
-            onClick={() => question(1)}
-            className={`${
-              selectedQuestion === 1 ? "bg-primaryblue" : "bg-slateBlue"
-            } py-3 xl:py-5 rounded-2xl text-center cursor-pointer hover:opacity-80 hover:-translate-y-1 transition-all ease-in duration-200`}
-          >
-            lanky kong
-          </div>
-          <div
-            onClick={() => question(2)}
-            className={`${
-              selectedQuestion === 2 ? "bg-primaryblue" : "bg-slateBlue"
-            } py-3 xl:py-5 rounded-2xl text-center cursor-pointer hover:opacity-80 hover:-translate-y-1 transition-all ease-in duration-200`}
-          >
-            zelda
-          </div>
-          <div
-            onClick={() => question(3)}
-            className={`${
-              selectedQuestion === 3 ? "bg-primaryblue" : "bg-slateBlue"
-            } py-3 xl:py-5 rounded-2xl text-center cursor-pointer hover:opacity-80 hover:-translate-y-1 transition-all ease-in duration-200`}
-          >
-            link
-          </div>
-          <div
-            onClick={() => question(4)}
-            className={`${
-              selectedQuestion === 4 ? "bg-primaryblue" : "bg-slateBlue"
-            } py-3 xl:py-5 rounded-2xl text-center cursor-pointer hover:opacity-80 hover:-translate-y-1 transition-all ease-in duration-200`}
-          >
-            nashor
-          </div>
+          {allQuestions[index].question.answers.$values.map(
+            (alternative, index) => (
+              <div
+                key={alternative.$id}
+                onClick={() => question(index, alternative.isCorrect)}
+                className={`${
+                  selectedAnswer === index ? "bg-primaryblue" : "bg-slateBlue"
+                } py-3 xl:py-5 rounded-2xl text-center cursor-pointer hover:bg-primaryblue hover:opacity-80 hover:-translate-y-1 transition-all ease-in duration-200`}
+              >
+                {alternative.answer}
+              </div>
+            )
+          )}
         </div>
+
         <div className="text-white mt-3 text-center">
           <button
             className="px-4 py-2 border-green-500 border-solid border-2 rounded-xl font-bold text-lg"
@@ -178,7 +253,7 @@ function QuizComponent() {
         </div>
 
         <div>
-          {answered == true ? (
+          {lockAnswer ? (
             answeredCorrect ? (
               <div className="text-white">you answered correct</div>
             ) : (

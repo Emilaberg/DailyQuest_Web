@@ -7,12 +7,16 @@ import BrowseAll from "../components/BrowseAll";
 import HelpingHand from "../components/HelpingHand";
 import RecentlyAdded from "../components/RecentlyAdded";
 import { useLoaderData } from "react-router-dom";
+import Newsletter from "../components/NewsletterComponent";
 
 import CookieConsent from "../components/CookieConsent";
 
-
 // Fetch data
 export async function loader() {
+  //test fetcha data
+  const apiService = ApiService();
+
+  const result = apiService.getQuizbyId(1);
   return "hello from loader";
 }
 
@@ -22,18 +26,14 @@ export async function action() {
 }
 
 function HomePage() {
-  const apiService = ApiService();
   const variableFromLoader = useLoaderData();
-
-  console.log(variableFromLoader);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-
       <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
         <CookieConsent /> {}
         <section className="flex items-center justify-center min-h-screen ">
-
           <Welcome />
         </section>
         <section className="flex items-center justify-center lg:-mt-52 lg:mb-72 lg:mx-72">

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 function GameCard({ imageUrl, gameName, quizId }) {
-  const game = "world-of-warcraft";
   return (
     <>
       <Link
@@ -10,7 +9,7 @@ function GameCard({ imageUrl, gameName, quizId }) {
       >
         <div className="flex flex-col justify-end ">
           <img
-            className=" bg-center bg-no-repeat bg-cover"
+            className="w-full h-[150px] object-cover object-center"
             src={`${imageUrl}`}
           />
         </div>

@@ -3,7 +3,7 @@ function AdminLoginOverlay() {
     return;
   }
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-black bg-opacity-80">
+    <div className="w-1/2 min-h-screen flex justify-center items-center bg-black bg-opacity-80">
       <div className="text-adminLightSlateGray w-1/3 flex flex-col items-center gap-20 bg-midnightBlue rounded-xl shadow-around shadow-white ">
         <div className="w-1/2 my-10">
           <img

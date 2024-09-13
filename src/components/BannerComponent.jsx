@@ -1,13 +1,27 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
   const navigate = useNavigate();
-  //src/assets/images/mystery-box-with-gifts-concept.jpg
+  const [isValid, setIsValid] = useState(false);
+
+  let styles = isValid
+    ? `relative flex justify-center items-center w-full h-[384px] bg-cover bg-center mb-32 bg-[url(${imageUrl})]`
+    : "relative flex justify-center items-center w-full h-[384px] bg-cover bg-center mb-32 url(../src/assets/images/mystery-box-with-gifts-concept.jpg)";
+
+  useEffect(() => {
+    if (imageUrl == undefined) {
+      setIsValid(false);
+    } else {
+      fetch(imageUrl).then((res) => {
+        setIsValid(res.status === 200);
+      });
+    }
+  }, []);
+  console.log(typeof imageUrl);
   return (
     <>
-      <section
-        className={`relative flex justify-center items-center w-full h-[384px] bg-[url(../${imageUrl})] bg-cover bg-center mb-32`}
-      >
+      <section className={styles}>
         <div className="flex flex-col items-center">
           <h1 className="z-20 font-bold text-center text-lightSlateGray text-8xl mb-10">
             {title}

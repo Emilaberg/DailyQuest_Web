@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import Newsletter from "../components/NewsletterComponent";
+import { useState } from "react";
 
 function Footer() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <footer className="relative flex items-center justify-center md:justify-between bottom-0 py-3 w-full h-60 bg-gradient-to-r from-[#0C101F] from-0% to-[#980CDA] to-100% ">
@@ -15,10 +18,14 @@ function Footer() {
             <h2 className="text-2xl text-center capitalize text-[25px] font-semibold">
               Subscribe to our newsletter
             </h2>
-            <button className="text-[12px] mt-3 uppercase bg-gradient-primaryBlue rounded-[25px] px-3 py-2 md:w-1/2">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="text-[12px] mt-3 uppercase bg-gradient-primaryBlue rounded-[25px] px-3 py-2 md:w-1/2"
+            >
               lets do this
             </button>
           </div>
+          <Newsletter open={isOpen} onClose={() => setIsOpen(false)} />
 
           <div className="text-center mt-auto">
             <div>DailyQuest @ 2024</div>

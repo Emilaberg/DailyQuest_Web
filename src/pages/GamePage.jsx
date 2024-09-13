@@ -4,12 +4,14 @@ import TodaysQuest from "../components/Todaysquest";
 import BannerComponent from "../components/BannerComponent";
 import { useLoaderData, useLocation, useParams } from "react-router-dom";
 import ApiService from "../hooks/apiService";
+import { useEffect, useState } from "react";
 
 //hämta data
 //loaders (om det används) måste returnera något. om det inte ska returnera något, returnera null
 export async function loader({ params }) {
   const apiCaller = ApiService();
-  const quiz = await apiCaller.getQuizbyId(params.quizId);
+  const response = await apiCaller.getQuizbyId(params.quizId);
+  const quiz = response.data;
   return { quiz };
 }
 
@@ -21,21 +23,30 @@ export async function action() {
 
 export default function GamePage() {
   const { quiz } = useLoaderData();
+  const [quizQuestions, setQuizQuestions] = useState(
+    quiz.quizQuestions.$values
+  );
 
   return (
     <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
       <BannerComponent
-        title={quiz.QuizName}
+        title={quiz.quizName}
         imageUrl={quiz.image_url}
       />
-      <section className="mx-auto text-white mb-32 w-2/3">
-        <h1 className="text-5xl text-center">THE GAME NAME</h1>
+      <section className="flex items-center justify-center lg:mx-72 my-10">
+        <TodaysQuest
+          imageUrl={"../src/assets/images/Image-missing.jpg"}
+          textPrompt="THIS IS WHERE AWESOME TEXT SHOULD BE "
+        />
+      </section>
+      <section className="mx-auto bg-midnightBlue_V2 px-5 py-2 text-white mb-32 w-2/3">
+        <h1 className="text-5xl text-center">{quiz.quizName.slice(0, 17)}</h1>
 
         <div>
           <h2 className="font-bold mb-3 text-2xl">
-            What is world of warcraft for game?
+            What is {quiz.quizName.slice(0, 17)} for game?
           </h2>
-          <p>
+          <p className="text-2xl">
             World of Warcraft (WoW) is a massively multiplayer online
             role-playing game (MMORPG) developed by Blizzard Entertainment. Set
             in the fantasy world of Azeroth, players create characters and
@@ -46,10 +57,9 @@ export default function GamePage() {
             and storylines, making every adventure unique.
           </p>
 
-          <h2 className="font-bold mb-3 text-2xl">what is the quiz about</h2>
-          <p>
+          <p className="text-2xl mt-10">
             <span className="font-bold">
-              World of Warcraft Knowledge Challenge
+              {quiz.quizName.slice(0, 17)} Challenge
             </span>
             <br />
             Test your knowledge of the World of Warcraft universe with this
@@ -61,14 +71,12 @@ export default function GamePage() {
           </p>
         </div>
       </section>
-      <section className="flex items-center justify-center lg:mx-72 my-40">
-        <TodaysQuest
-          imageUrl={"../src/assets/images/Image-missing.jpg"}
-          textPrompt="THIS IS WHERE AWESOME TEXT SHOULD BE "
-        />
-      </section>
+
       <section className="min-h-screen">
-        <QuizComponent />
+        <QuizComponent
+          quizQuestions={quizQuestions}
+          questionTitle={quiz.quizName}
+        />
       </section>
     </div>
   );

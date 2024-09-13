@@ -34,7 +34,7 @@ const CookieConsent = () => {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex flex-col md:flex-row justify-between items-center shadow-md gap-4 md:gap-6">
+    <div className="z-20 fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex flex-col md:flex-row justify-between items-center shadow-md gap-4 md:gap-6">
       <p className="text-sm md:text-base">
         We use cookies to improve your experience. By using our site, you agree
         to our use of cookies.
