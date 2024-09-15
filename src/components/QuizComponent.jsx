@@ -17,6 +17,8 @@ function QuizComponent({ quizQuestions, questionTitle }) {
 
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
 
+  const [correctAnswer, setCorrectAnswer] = useState("");
+
   //get state from route (ANVÄNDS INTE)
   let { state } = useLocation();
 
@@ -27,17 +29,22 @@ function QuizComponent({ quizQuestions, questionTitle }) {
 
   useEffect(() => {
     isQuestionAnswered();
+
+    // set correct answer
+
+    let correctAnswer = allQuestions[index].question.answers.$values.filter(
+      (x) => x.isCorrect == true
+    );
+    setCorrectAnswer(correctAnswer[0].answer);
     // console.log(allQuestions);
     // console.log(allQuestions[0].question.answers);
 
     // console.log("load next question");
-    // console.log(answeredQuestions);
+    console.log(answeredQuestions);
   }, [index]);
 
   //sätter den valda frågan som användaren valt.
   function question(id, isCorrect) {
-    console.log("answer is " + isCorrect);
-
     if (lockAnswer) return;
 
     switch (id) {
@@ -76,6 +83,9 @@ function QuizComponent({ quizQuestions, questionTitle }) {
         allQuestions[index].question.answers.$values[selectedAnswer],
       alternative: selectedAnswer,
       title: allQuestions[index].question.question,
+      pickedAnswer:
+        allQuestions[index].question.answers.$values[selectedAnswer].answer,
+      correctAnswer: correctAnswer,
     };
 
     setAnsweredQuestions((oldAnswers) => [...oldAnswers, answerObject]);
@@ -125,50 +135,35 @@ function QuizComponent({ quizQuestions, questionTitle }) {
     setIndex(index + 1);
   }
 
-  const [emailResultString, setEmailResultString] = useState("send result");
-  const [finalResult, setFinalResult] = useState([]);
-  function sendEmailResult() {
-    //skapa ett result objekt med rätt data sen stringifya detta till
+  const [calculatingResult, setCalculatingResult] = useState(false);
+  const [resultCalculated, setResultCalculated] = useState(false);
+  const [scorepoints, setScorepoints] = useState(0);
+  function CalculateResult() {
+    //set calculatingResult till true because we begin calculating,
+    setCalculatingResult(true);
 
-    console.log(answeredQuestions);
-    let resultObject = {
-      questionId: null,
-      answer: "",
-      correctlyAnswered: false,
-    };
-
-    let finalResult = [];
-    answeredQuestions.forEach((question) => {
-      resultObject.questionId = question.questionId;
-      resultObject.answer = question.lockedAnswer.answer;
-      resultObject.title = question.title;
-
-      setFinalResult((oldResult) => [...oldResult, resultObject]);
-
-      resultObject.answer = "";
-      resultObject.correctlyAnswered = false;
-      resultObject.questionId = null;
+    //räkna ut scorepoints, det kommer från answeredQuestions,
+    //räkna hur många som har iscorrect på sig.
+    let scorepoint = 0;
+    answeredQuestions.forEach((a) => {
+      if (a.lockedAnswer.isCorrect == true) scorepoint++;
     });
-
-    console.log(finalResult);
-
-    const resultsToString = JSON.stringify(finalResult, null, 2);
-    const resultsTitle = questionTitle;
-
-    mailResultTo("DailyQuest@mail.com", resultsTitle, resultsToString);
-    setEmailResultString("send email again");
+    //set result calculated, because the result has been calculated.
+    setResultCalculated(true);
+    console.log(scorepoint);
+    //calculation is done, set scorepoint to final score
+    setScorepoints(scorepoint);
+    //set calculatingResult till false because we are done calculating,
+    setCalculatingResult(false);
   }
 
+  function saveResultToLocalStorage() {
+    let storageObject = [answeredQuestions];
+
+    localStorage.setItem("Results", JSON.stringify(storageObject));
+  }
   return (
     <div className="flex flex-col items-center justify-center">
-      <div>
-        <button
-          className="text-white"
-          onClick={sendEmailResult}
-        >
-          {emailResultString}
-        </button>
-      </div>
       <span className="text-white">
         {index + 1} / {allQuestions.length}
       </span>
@@ -244,98 +239,136 @@ function QuizComponent({ quizQuestions, questionTitle }) {
         </div>
 
         <div className="text-white mt-3 text-center">
-          <button
-            className="px-4 py-2 border-green-500 border-solid border-2 rounded-xl font-bold text-lg"
-            onClick={checkAnswer}
-          >
-            check answer
-          </button>
-        </div>
-
-        <div>
-          {lockAnswer ? (
-            answeredCorrect ? (
-              <div className="text-white">you answered correct</div>
-            ) : (
-              <div className="text-white">you answered incorrect</div>
-            )
-          ) : null}
+          {answeredQuestions.length == allQuestions.length ? (
+            <button
+              className={`px-4 py-2 border-primaryblue hover:bg-primaryblue hover:border-slateBlue ${
+                lockAnswer ? "bg-primaryblue" : null
+              } transition-colors ease-in duration-100 border-solid border-2 rounded-xl font-bold text-lg`}
+              onClick={CalculateResult}
+            >
+              See Your Score!
+            </button>
+          ) : (
+            <button
+              className={`px-4 py-2 border-primaryblue hover:bg-primaryblue hover:border-slateBlue ${
+                lockAnswer ? "bg-primaryblue" : null
+              } transition-colors ease-in duration-100 border-solid border-2 rounded-xl font-bold text-lg`}
+              onClick={checkAnswer}
+            >
+              lock answer
+            </button>
+          )}
         </div>
       </div>
 
-      {/* final results */}
-      <article className="flex flex-col w-full my-32">
-        <h1 className="text-white text-center text-3xl mb-5">Final results</h1>
+      {calculatingResult ? null : resultCalculated ? (
+        <article className="flex flex-col w-full my-32">
+          <h1 className="text-white text-center text-3xl mb-5">
+            Final results
+          </h1>
 
-        {/* table container */}
-        <div class="mx-auto w-1/2 relative overflow-x-auto shadow-md sm:rounded-lg">
-          {/* table */}
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th
-                  scope="col"
-                  class="px-6 py-3"
-                >
-                  Nr
-                </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3"
-                >
-                  Question
-                </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3"
-                >
-                  picked answer
-                </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3"
-                >
-                  correct answer
-                </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3"
-                >
-                  correct
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  1
-                </th>
-                <td class="px-6 py-4">Which game first introduced Yoshi?</td>
-                <td class="px-6 py-4">Super Mario Bros</td>
-                <td class="px-6 py-4">Super Mario World</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="font-medium text-red-600 dark:text-red-800"
+          {/* table container */}
+          <div className="mx-auto w-1/2 relative overflow-x-auto shadow-md sm:rounded-lg">
+            {/* table */}
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
                   >
-                    X
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                    Nr
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
+                  >
+                    Question
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
+                  >
+                    picked answer
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
+                  >
+                    correct answer
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
+                  >
+                    correct
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* MAPPING OF QUESTIONS */}
 
-          {/* save result button */}
-          <div className="flex justify-center my-10">
-            <button className="bg-primaryblue bg-opacity-80 px-3 py-1 rounded-lg text-white hover:bg-opacity-100 transition-colors ease-in duration-100">
-              save Result
-            </button>
+                {answeredQuestions.map((q, index) => (
+                  <tr
+                    key={index}
+                    className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                  >
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      {index + 1}
+                    </th>
+                    <td className="px-6 py-4">{q.title}</td>
+                    <td className="px-6 py-4">{q.pickedAnswer}</td>
+                    <td className="px-6 py-4">{q.correctAnswer}</td>
+                    <td className="px-6 py-4">
+                      {q.lockedAnswer.isCorrect ? (
+                        <span className="font-medium text-green-600 dark:text-green-800">
+                          ✓
+                        </span>
+                      ) : (
+                        <span className="font-medium text-red-600 dark:text-red-800">
+                          X
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr className="font-semibold text-gray-900 dark:text-white">
+                  <th
+                    scope="row"
+                    className="px-6 py-3 text-base"
+                  >
+                    {scorepoints}
+                  </th>
+                  <td className="px-6 py-3">
+                    {scorepoints} / {answeredQuestions.length}
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+
+            {/* save result button */}
+            <div className="flex justify-center my-10">
+              <button
+                onClick={saveResultToLocalStorage}
+                className="bg-primaryblue bg-opacity-80 px-3 py-1 rounded-lg text-white hover:bg-opacity-100 transition-colors ease-in duration-100"
+              >
+                save Result
+              </button>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      ) : (
+        <div>calculating results...</div>
+      )}
+      {/* final results */}
     </div>
   );
 }
