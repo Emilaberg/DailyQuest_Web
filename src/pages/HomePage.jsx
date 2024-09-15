@@ -47,7 +47,7 @@ function HomePage() {
           <Welcome />
         </section>
         <section className="flex flex-col justify-center items-center">
-          <div className="flex w-2/3 h-20 bg-black rounded-2xl mb-32 -translate-y-1/2 text-white">
+          <div className="flex w-[90%] h-20  bg-gradient-border rounded-2xl mb-32 -translate-y-1/2 text-white">
             <h1 className="m-auto">SOME TEXT VI KAN HA HÄR; NÅGOT COOLT</h1>
           </div>
           <TodaysQuest

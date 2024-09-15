@@ -29,7 +29,7 @@ function Welcome() {
     //     </a>
     //   </div>
     // </>
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden transition-opacity ease-in duration-1000">
       {/* video background */}
       <video
         className="w-full"
