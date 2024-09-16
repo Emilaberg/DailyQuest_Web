@@ -46,36 +46,18 @@ export default function GamePage() {
         />
       </section>
       <section className="mx-auto bg-midnightBlue_V2 px-5 py-2 text-white mb-32 w-2/3">
-        <h1 className="text-5xl text-center">{quiz.quizName.slice(0, 17)}</h1>
+        <h1 className="text-5xl text-center">{quiz.quizName}</h1>
 
         <div>
           <h2 className="font-bold mb-3 text-2xl">
-            What is {quiz.quizName.slice(0, 17)} for game?
+            What is {quiz.quizName} for game?
           </h2>
-          <p className="text-2xl">
-            {quiz.quizDescription}
-            {/* World of Warcraft (WoW) is a massively multiplayer online
-            role-playing game (MMORPG) developed by Blizzard Entertainment. Set
-            in the fantasy world of Azeroth, players create characters and
-            embark on epic quests, battling monsters, exploring dungeons, and
-            engaging in player-versus-player combat. The game is known for its
-            rich lore, expansive world, and vibrant community. Players can
-            choose from various races and classes, each with unique abilities
-            and storylines, making every adventure unique. */}
-          </p>
+          <p className="text-2xl">{quiz.quizDescription}</p>
 
           <p className="text-2xl mt-10">
-            <span className="font-bold">
-              {quiz.quizName.slice(0, 17)} Challenge
-            </span>
+            <span className="font-bold">{quiz.quizName} Challenge</span>
             <br />
             {quiz.quizChallenge}
-            {/* Test your knowledge of the World of Warcraft universe with this
-            engaging quiz! This quiz contains 10 questions that cover various
-            aspects of the game, including its history, characters, locations,
-            and gameplay mechanics. Whether you're a seasoned WoW player or new
-            to the game, this quiz will challenge your understanding and provide
-            a fun way to revisit the world of Azeroth. */}
           </p>
         </div>
       </section>

@@ -7,6 +7,9 @@ import AnswerContainer from "./AnswerContainer";
 import mailResultTo from "../Utils/mailToFunction";
 
 function QuizComponent({ quizQuestions, questionTitle }) {
+  const [quizSessionId, setQuizSessionId] = useState(
+    Math.floor(Math.random() * 16777215).toString(16)
+  );
   const [index, setIndex] = useState(0);
   //answerprops
   const [allQuestions, setAllQuestions] = useState(quizQuestions);
@@ -16,6 +19,10 @@ function QuizComponent({ quizQuestions, questionTitle }) {
   const [lockAnswer, setLockAnswer] = useState(false);
 
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
+
+  const [correctAnswer, setCorrectAnswer] = useState("");
+
+  const [quizResultHasBeenAdded, setQuizResultHasBeenAdded] = useState(false);
 
   //get state from route (ANVÄNDS INTE)
   let { state } = useLocation();
@@ -27,17 +34,22 @@ function QuizComponent({ quizQuestions, questionTitle }) {
 
   useEffect(() => {
     isQuestionAnswered();
+
+    // set correct answer
+
+    let correctAnswer = allQuestions[index].question.answers.$values.filter(
+      (x) => x.isCorrect == true
+    );
+    setCorrectAnswer(correctAnswer[0].answer);
     // console.log(allQuestions);
     // console.log(allQuestions[0].question.answers);
 
     // console.log("load next question");
-    // console.log(answeredQuestions);
+    console.log(answeredQuestions);
   }, [index]);
 
   //sätter den valda frågan som användaren valt.
   function question(id, isCorrect) {
-    console.log("answer is " + isCorrect);
-
     if (lockAnswer) return;
 
     switch (id) {
@@ -70,12 +82,19 @@ function QuizComponent({ quizQuestions, questionTitle }) {
       alert("PICK A FUCKING ANSWER");
       return;
     }
+    if (lockAnswer) {
+      return;
+    }
+
     let answerObject = {
       questionId: index,
       lockedAnswer:
         allQuestions[index].question.answers.$values[selectedAnswer],
       alternative: selectedAnswer,
       title: allQuestions[index].question.question,
+      pickedAnswer:
+        allQuestions[index].question.answers.$values[selectedAnswer].answer,
+      correctAnswer: correctAnswer,
     };
 
     setAnsweredQuestions((oldAnswers) => [...oldAnswers, answerObject]);
@@ -125,50 +144,79 @@ function QuizComponent({ quizQuestions, questionTitle }) {
     setIndex(index + 1);
   }
 
-  const [emailResultString, setEmailResultString] = useState("send result");
-  const [finalResult, setFinalResult] = useState([]);
-  function sendEmailResult() {
-    //skapa ett result objekt med rätt data sen stringifya detta till
+  const [calculatingResult, setCalculatingResult] = useState(false);
+  const [resultCalculated, setResultCalculated] = useState(false);
+  const [scorepoints, setScorepoints] = useState(0);
+  function CalculateResult() {
+    //set calculatingResult till true because we begin calculating,
+    setCalculatingResult(true);
 
-    console.log(answeredQuestions);
-    let resultObject = {
-      questionId: null,
-      answer: "",
-      correctlyAnswered: false,
+    //räkna ut scorepoints, det kommer från answeredQuestions,
+    //räkna hur många som har iscorrect på sig.
+    let scorepoint = 0;
+    answeredQuestions.forEach((a) => {
+      if (a.lockedAnswer.isCorrect == true) scorepoint++;
+    });
+    //set result calculated, because the result has been calculated.
+    setResultCalculated(true);
+    console.log(scorepoint);
+    //calculation is done, set scorepoint to final score
+    setScorepoints(scorepoint);
+    //set calculatingResult till false because we are done calculating,
+    setCalculatingResult(false);
+  }
+
+  function saveResultToLocalStorage() {
+    setQuizResultHasBeenAdded(true);
+    // let storageObject = [answeredQuestions];
+    //create storage object
+    let storageObject = {
+      totalScore: scorepoints,
+      quizQuestionId: quizSessionId,
+      questionTitle: questionTitle,
+      answeredQuestions: [],
+      date: new Date().toLocaleString(),
     };
 
-    let finalResult = [];
-    answeredQuestions.forEach((question) => {
-      resultObject.questionId = question.questionId;
-      resultObject.answer = question.lockedAnswer.answer;
-      resultObject.title = question.title;
-
-      setFinalResult((oldResult) => [...oldResult, resultObject]);
-
-      resultObject.answer = "";
-      resultObject.correctlyAnswered = false;
-      resultObject.questionId = null;
+    //push each questions into storage object
+    answeredQuestions.forEach((x) => {
+      let temp = {
+        correctAnswer: x.correctAnswer,
+        pickedAnswer: x.pickedAnswer,
+        question_title: x.title,
+        isCorrect: x.lockedAnswer.isCorrect,
+      };
+      storageObject.answeredQuestions.push(temp);
     });
 
-    console.log(finalResult);
+    console.log(storageObject);
 
-    const resultsToString = JSON.stringify(finalResult, null, 2);
-    const resultsTitle = questionTitle;
+    //add if localstorage has questions already
+    if (addObjectTolocalStorage(storageObject)) {
+      return true;
+    }
+    // localStorage.setItem("Results", JSON.stringify([storageObject]));
+  }
 
-    mailResultTo("DailyQuest@mail.com", resultsTitle, resultsToString);
-    setEmailResultString("send email again");
+  async function addObjectTolocalStorage(objectToAdd) {
+    const result = localStorage.getItem("Results");
+
+    //finns det resultat, parse resultat
+    if (result) {
+      const parsedResult = await JSON.parse(result);
+
+      parsedResult.push(objectToAdd);
+      // vi tar det gamla resultat, parsar det och lägger till det nya resultatet till arrayen om det inte redan finns.
+      localStorage.setItem("Results", JSON.stringify(parsedResult));
+    } else {
+      // om det inte finns något resultat då vill vi lägga in det som nytt resultat i en array.
+      localStorage.setItem("Results", JSON.stringify([objectToAdd]));
+    }
+    return true;
   }
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div>
-        <button
-          className="text-white"
-          onClick={sendEmailResult}
-        >
-          {emailResultString}
-        </button>
-      </div>
       <span className="text-white">
         {index + 1} / {allQuestions.length}
       </span>
@@ -244,24 +292,135 @@ function QuizComponent({ quizQuestions, questionTitle }) {
         </div>
 
         <div className="text-white mt-3 text-center">
-          <button
-            className="px-4 py-2 border-green-500 border-solid border-2 rounded-xl font-bold text-lg"
-            onClick={checkAnswer}
-          >
-            check answer
-          </button>
-        </div>
-
-        <div>
-          {lockAnswer ? (
-            answeredCorrect ? (
-              <div className="text-white">you answered correct</div>
-            ) : (
-              <div className="text-white">you answered incorrect</div>
-            )
-          ) : null}
+          {answeredQuestions.length == allQuestions.length ? (
+            <button
+              className={`px-4 py-2 border-primaryblue hover:bg-primaryblue hover:border-slateBlue ${
+                lockAnswer ? "bg-primaryblue" : null
+              } transition-colors ease-in duration-100 border-solid border-2 rounded-xl font-bold text-lg`}
+              onClick={CalculateResult}
+            >
+              See Your Score!
+            </button>
+          ) : (
+            <button
+              className={`px-4 py-2 border-primaryblue hover:bg-primaryblue hover:border-slateBlue ${
+                lockAnswer ? "bg-primaryblue" : null
+              } transition-colors ease-in duration-100 border-solid border-2 rounded-xl font-bold text-lg`}
+              onClick={checkAnswer}
+            >
+              lock answer
+            </button>
+          )}
         </div>
       </div>
+
+      {calculatingResult ? null : resultCalculated ? (
+        <article className="flex flex-col w-full my-32">
+          <h1 className="text-white text-center text-3xl mb-5">
+            Final results
+          </h1>
+
+          {/* table container */}
+          <div className="mx-auto w-1/2 relative overflow-x-auto shadow-md sm:rounded-lg">
+            {/* table */}
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
+                  >
+                    Nr
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
+                  >
+                    Question
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
+                  >
+                    picked answer
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
+                  >
+                    correct answer
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3"
+                  >
+                    correct
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* MAPPING OF QUESTIONS */}
+
+                {answeredQuestions.map((q, index) => (
+                  <tr
+                    key={index}
+                    className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                  >
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      {index + 1}
+                    </th>
+                    <td className="px-6 py-4">{q.title}</td>
+                    <td className="px-6 py-4">{q.pickedAnswer}</td>
+                    <td className="px-6 py-4">{q.correctAnswer}</td>
+                    <td className="px-6 py-4">
+                      {q.lockedAnswer.isCorrect ? (
+                        <span className="font-medium text-green-600 dark:text-green-800">
+                          ✓
+                        </span>
+                      ) : (
+                        <span className="font-medium text-red-600 dark:text-red-800">
+                          X
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr className="font-semibold text-gray-900 dark:text-white">
+                  <th
+                    scope="row"
+                    className="px-6 py-3 text-base"
+                  >
+                    total points:
+                  </th>
+                  <td className="px-6 py-3">
+                    {scorepoints} / {answeredQuestions.length}
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+
+            {/* save result button */}
+            <div className="flex justify-center my-10">
+              <button
+                disabled={quizResultHasBeenAdded}
+                onClick={saveResultToLocalStorage}
+                className="bg-primaryblue bg-opacity-80 px-3 py-1 rounded-lg text-white hover:bg-opacity-100 transition-colors ease-in duration-100"
+              >
+                save Result
+              </button>
+            </div>
+          </div>
+        </article>
+      ) : null}
+      {/* final results */}
     </div>
   );
 }
