@@ -17,12 +17,17 @@ function PlayedQuizzesPage() {
   console.log(storedResults);
   return (
     <>
-      <section className="w-full min-h-screen">
+      <section
+        className="w-full min-h-screen bg-no-repeat bg-center bg-cover pb-32"
+        style={{
+          backgroundImage: `url(../src/assets/backgrounds/landing_page_blob.svg)`,
+        }}
+      >
         <BannerComponent
           title="My Played Quizzes"
           imageUrl="../src/assets/images/browseBannerMixGames.png"
         />
-        <div className="flex flex-col items-center w-full mb-32">
+        <div className="flex flex-col items-center w-full ">
           <h1 className="text-white font-bold text-4xl">My played Quizzes</h1>
 
           {storedResults ? (
