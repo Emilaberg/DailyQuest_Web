@@ -7,6 +7,9 @@ import AnswerContainer from "./AnswerContainer";
 import mailResultTo from "../Utils/mailToFunction";
 
 function QuizComponent({ quizQuestions, questionTitle }) {
+  const [quizSessionId, setQuizSessionId] = useState(
+    Math.floor(Math.random() * 16777215).toString(16)
+  );
   const [index, setIndex] = useState(0);
   //answerprops
   const [allQuestions, setAllQuestions] = useState(quizQuestions);
@@ -18,6 +21,8 @@ function QuizComponent({ quizQuestions, questionTitle }) {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
 
   const [correctAnswer, setCorrectAnswer] = useState("");
+
+  const [quizResultHasBeenAdded, setQuizResultHasBeenAdded] = useState(false);
 
   //get state from route (ANVÄNDS INTE)
   let { state } = useLocation();
@@ -77,6 +82,10 @@ function QuizComponent({ quizQuestions, questionTitle }) {
       alert("PICK A FUCKING ANSWER");
       return;
     }
+    if (lockAnswer) {
+      return;
+    }
+
     let answerObject = {
       questionId: index,
       lockedAnswer:
@@ -158,10 +167,53 @@ function QuizComponent({ quizQuestions, questionTitle }) {
   }
 
   function saveResultToLocalStorage() {
-    let storageObject = [answeredQuestions];
+    setQuizResultHasBeenAdded(true);
+    // let storageObject = [answeredQuestions];
+    //create storage object
+    let storageObject = {
+      quizQuestionId: quizSessionId,
+      questionTitle: questionTitle,
+      answeredQuestions: [],
+      date: new Date().toLocaleString(),
+    };
 
-    localStorage.setItem("Results", JSON.stringify(storageObject));
+    //push each questions into storage object
+    answeredQuestions.forEach((x) => {
+      let temp = {
+        correctAnswer: x.correctAnswer,
+        pickedAnswer: x.pickedAnswer,
+        question_title: x.title,
+        isCorrect: x.lockedAnswer.isCorrect,
+      };
+      storageObject.answeredQuestions.push(temp);
+    });
+
+    console.log(storageObject);
+
+    //add if localstorage has questions already
+    if (addObjectTolocalStorage(storageObject)) {
+      return true;
+    }
+    // localStorage.setItem("Results", JSON.stringify([storageObject]));
   }
+
+  async function addObjectTolocalStorage(objectToAdd) {
+    const result = localStorage.getItem("Results");
+
+    //finns det resultat, parse resultat
+    if (result) {
+      const parsedResult = await JSON.parse(result);
+
+      parsedResult.push(objectToAdd);
+      // vi tar det gamla resultat, parsar det och lägger till det nya resultatet till arrayen om det inte redan finns.
+      localStorage.setItem("Results", JSON.stringify(parsedResult));
+    } else {
+      // om det inte finns något resultat då vill vi lägga in det som nytt resultat i en array.
+      localStorage.setItem("Results", JSON.stringify([objectToAdd]));
+    }
+    return true;
+  }
+
   return (
     <div className="flex flex-col items-center justify-center">
       <span className="text-white">
@@ -342,7 +394,7 @@ function QuizComponent({ quizQuestions, questionTitle }) {
                     scope="row"
                     className="px-6 py-3 text-base"
                   >
-                    {scorepoints}
+                    total points:
                   </th>
                   <td className="px-6 py-3">
                     {scorepoints} / {answeredQuestions.length}
@@ -357,6 +409,7 @@ function QuizComponent({ quizQuestions, questionTitle }) {
             {/* save result button */}
             <div className="flex justify-center my-10">
               <button
+                disabled={quizResultHasBeenAdded}
                 onClick={saveResultToLocalStorage}
                 className="bg-primaryblue bg-opacity-80 px-3 py-1 rounded-lg text-white hover:bg-opacity-100 transition-colors ease-in duration-100"
               >
@@ -365,9 +418,7 @@ function QuizComponent({ quizQuestions, questionTitle }) {
             </div>
           </div>
         </article>
-      ) : (
-        <div>calculating results...</div>
-      )}
+      ) : null}
       {/* final results */}
     </div>
   );

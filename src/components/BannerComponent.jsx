@@ -36,7 +36,7 @@ function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
         <div className="absolute inset-0 bg-black opacity-50"></div>
 
         <div className=" relative flex flex-col items-center z-10">
-          <h1 className=" font-bold text-center text-lightSlateGray text-8xl mb-10">
+          <h1 className="font-bold text-center text-lightSlateGray text-8xl mb-10 uppercase">
             {title}
           </h1>
           {buttonText ? (
