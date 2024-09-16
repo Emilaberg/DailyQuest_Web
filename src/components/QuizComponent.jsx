@@ -32,6 +32,21 @@ function QuizComponent({ quizQuestions, questionTitle }) {
   const [isValid, setIsValid] = useState(true); // (ANVÄNDS INTE)
   let styles = "mx-auto object-contain object-center"; //  (ANVÄNDS INTE)
 
+  function shuffle(array) {
+    const copy = array.slice();
+    let result = [];
+    while (copy.length > 0) {
+      const randomIndex = Math.floor(Math.random() * copy.length);
+      result.push(copy[randomIndex]);
+      copy.splice(randomIndex, 1);
+    }
+    return result;
+  }
+
+  useEffect(() => {
+    shuffleAnswers();
+  }, []);
+
   useEffect(() => {
     isQuestionAnswered();
 
@@ -45,9 +60,17 @@ function QuizComponent({ quizQuestions, questionTitle }) {
     // console.log(allQuestions[0].question.answers);
 
     // console.log("load next question");
-    console.log(answeredQuestions);
+    // console.log(answeredQuestions);
   }, [index]);
 
+  function shuffleAnswers() {
+    for (let i = 0; i < allQuestions.length; i++) {
+      let unShuffledArray = allQuestions[i].question.answers.$values;
+      let shuffledArray = shuffle(unShuffledArray);
+
+      allQuestions[i].question.answers.$values = shuffledArray;
+    }
+  }
   //sätter den valda frågan som användaren valt.
   function question(id, isCorrect) {
     if (lockAnswer) return;
