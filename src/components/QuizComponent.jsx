@@ -171,6 +171,7 @@ function QuizComponent({ quizQuestions, questionTitle }) {
     // let storageObject = [answeredQuestions];
     //create storage object
     let storageObject = {
+      totalScore: scorepoints,
       quizQuestionId: quizSessionId,
       questionTitle: questionTitle,
       answeredQuestions: [],
