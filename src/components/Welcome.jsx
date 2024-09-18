@@ -46,16 +46,21 @@ function Welcome() {
 
       {/* box */}
       <div className="absolute text-center top-1/4 left-1/2 -translate-x-1/2">
-        <h1 className="text-center text-white text-6xl font-bold rotate-[-20deg] mb-20 opacity-85">
-          Welcome to DailyQuest
+        <h1 className="text-center text-white text-6xl font-bold rotate-[-20deg] mb-20 opacity-85 text-shadow-5xl">
+          Welcome to
+          <img
+            className="inline pl-5"
+            src="src\assets\images\Webicon.png"
+            alt=""
+          />
         </h1>
-        <h3 className="text-white text-xl mb-3 opacity-85">
+        <h3 className="text-white text-xl mb-2 opacity-85">
           A new quiz every day, from games such as:
         </h3>
-        <h2 className="text-white text-2xl font-bold mb-3 opacity-85">
+        <h2 className="text-white text-2xl font-bold mb-2 opacity-85">
           World of Warcraft
         </h2>
-        <h2 className="text-white text-2xl font-bold mb-3 opacity-85">
+        <h2 className="text-white text-2xl font-bold mb-2 opacity-85">
           League of Legends
         </h2>
         <h2 className="text-white text-2xl font-bold opacity-85">
@@ -68,6 +73,20 @@ function Welcome() {
             </div>
           </div>
         </a>
+        <div className="w-full flex flex-col items-center justify-center mt-10">
+          <div className="mb-4 text-white">see more!</div>
+          <div className="animate-bounce">
+            <div className="bottom-0  bg-gradient-border flex flex-col items-center justify-center rounded-full p-[2px]">
+              <div className="bg-black flex justify-center px-4 py-3 rounded-full w-full">
+                <img
+                  className="rotate-[270deg] text-white w-2"
+                  src="../src/assets/icons/arrow_left.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

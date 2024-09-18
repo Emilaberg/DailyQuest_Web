@@ -22,7 +22,7 @@ function ReportForm() {
   const navigate = useNavigate();
   return (
     <>
-      <section className="relative min-h-screen">
+      <section className="relative">
         <div>
           <div
             className="grid sm:grid-cols-2 items-start gap-16 p-4 mx-auto max-w-4xl bg-[#17191B] 

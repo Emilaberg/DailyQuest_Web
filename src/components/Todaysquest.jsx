@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 function TodaysQuest({ textPrompt, imageUrl, quizName, quiz }) {
   return (
     <>
-      <div className="w-3/4">
+      <div className="w-[60%]">
         <div className="flex justify-center md:justify-start md:ml-3 lg:justify-start mb-10">
           <h1 className="text-white text-2xl uppercase font-bold mb-2 tracking-wider lg:text-3xl ">
             {quiz.quizName}
           </h1>
         </div>
 
-        <div className="flex w-full h-56 items-center justify-center bg-gradient-border px-4 py-4 rounded-[27px] mb-24 md:h-96">
+        <div className="flex w-full h-56 items-center justify-center bg-gradient-border px-3 py-3 rounded-[27px] mb-24 md:h-96">
           <div
             className="relative w-full h-full bg-center bg-no-repeat bg-cover rounded-[13.5px]"
             style={{ backgroundImage: `url(${quiz.imageUrl})` }}

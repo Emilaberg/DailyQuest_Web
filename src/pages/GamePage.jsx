@@ -5,7 +5,7 @@ import BannerComponent from "../components/BannerComponent";
 import { useLoaderData, useLocation, useParams } from "react-router-dom";
 import ApiService from "../hooks/apiService";
 import { useEffect, useState } from "react";
-
+import HelpingHand from "../components/HelpingHand";
 //hämta data
 //loaders (om det används) måste returnera något. om det inte ska returnera något, returnera null
 export async function loader({ params }) {
@@ -28,12 +28,7 @@ export default function GamePage() {
   );
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(../src/assets/backgrounds/landing_page_blob.svg)`,
-      }}
-      className="bg-no-repeat bg-center bg-cover"
-    >
+    <div className="bg-gradient-to-br from-0 from-[#05060B] to-100 to-[#11284B] pt-[100px]">
       <BannerComponent
         title={quiz.quizName}
         imageUrl={quiz.imageUrl}
@@ -45,8 +40,10 @@ export default function GamePage() {
           quiz={quiz}
         />
       </section>
-      <section className="mx-auto bg-midnightBlue_V2 px-5 py-2 text-white mb-32 w-2/3">
-        <h1 className="text-5xl text-center">{quiz.quizName}</h1>
+      <section className="mx-auto bg-midnightBlue_V2 px-10 py-10 rounded-xl text-white mb-32 w-2/3">
+        <h1 className="text-5xl text-center mb-10 font-semibold">
+          {quiz.quizName}
+        </h1>
 
         <div>
           <h2 className="font-bold mb-3 text-2xl">
@@ -54,19 +51,33 @@ export default function GamePage() {
           </h2>
           <p className="text-2xl">{quiz.quizDescription}</p>
 
-          <p className="text-2xl mt-10">
+          <h2 className="text-2xl mt-10 mb-3">
             <span className="font-bold">{quiz.quizName} Challenge</span>
-            <br />
-            {quiz.quizChallenge}
-          </p>
+          </h2>
+          <p className="text-2xl">{quiz.quizChallenge}</p>
         </div>
+        <a
+          href="#quiz"
+          className="text-xl mt-5 underline"
+        >
+          Lets Play!
+        </a>
       </section>
 
-      <section className="min-h-screen">
+      <section
+        id="quiz"
+        className="min-h-screen pt-32"
+      >
         <QuizComponent
           quizQuestions={quizQuestions}
           questionTitle={quiz.quizName}
         />
+      </section>
+
+      <section className="w-full flex justify-center mt-20 pb-60">
+        <div className="w-2/3">
+          <HelpingHand />
+        </div>
       </section>
     </div>
   );

@@ -17,7 +17,7 @@ function HelpingHand() {
           >
             Report a bug
             <img
-              src="src\assets\icons\bug.svg"
+              src="../src/assets/icons/bug.svg"
               alt=""
               className="w-5 h-5 md:h-[35px] md:w-[35px] lg:h-[40px] lg:w-[40px]"
             />
@@ -28,7 +28,7 @@ function HelpingHand() {
           >
             FAQ
             <img
-              src="src\assets\icons\questionmark.svg"
+              src="../src/assets/icons/questionmark.svg"
               alt=""
               className="w-5 h-5  md:h-[35px] md:w-[35px] lg:h-[40px] lg:w-[40px]"
             />
@@ -39,7 +39,7 @@ function HelpingHand() {
           >
             Email us
             <img
-              src="src\assets\icons\mail.svg"
+              src="../src/assets/icons/mail.svg"
               alt=""
               className="w-5 h-5 md:h-[35px] md:w-[35px] lg:h-[40px] lg:w-[40px]"
             />

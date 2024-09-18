@@ -1,5 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import BannerComponent from "../components/BannerComponent";
+import HelpingHand from "../components/HelpingHand";
 
 function FaqPage() {
   const Navigate = useNavigate();
@@ -24,7 +25,7 @@ function FaqPage() {
   }
   return (
     <>
-      <section className="w-full min-h-screen flex flex-col items-center bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover ">
+      <section className="w-full min-h-screen flex flex-col items-center bg-gradient-to-br from-0 from-[#05060B] to-100 to-[#11284B] pb-72 pt-[100px]">
         {/* image section */}
         <BannerComponent
           title={"FAQ PAGE"}
@@ -35,6 +36,10 @@ function FaqPage() {
         />
 
         <Outlet />
+
+        <section className="w-2/3 mt-20">
+          <HelpingHand />
+        </section>
       </section>
     </>
   );
