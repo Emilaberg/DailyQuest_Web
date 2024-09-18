@@ -15,6 +15,7 @@ export default {
         "2xl": "5px 5px 10px rgba(0, 0, 0, 0.75)", // Even larger shadow
         "3xl": "7px 7px 15px rgba(0, 0, 0, 0.75)", // More pronounced shadow
         "4xl": "10px 10px 20px rgba(0, 0, 0, 0.85)", // Extreme shadow
+        "5xl": "30px 30px 30px rgba(0, 0, 0, 1)", // Extreme shadow
       },
       backgroundImage: (theme) => ({
         "gradient-primaryBlue": `linear-gradient(to right, ${theme(

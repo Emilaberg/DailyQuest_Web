@@ -37,28 +37,25 @@ function HomePage() {
   return (
     <>
       <div
-        style={{
-          backgroundImage: `url(../src/assets/backgrounds/landing_page_blob.svg)`,
-        }}
-        className="bg-no-repeat bg-center bg-cover"
+        // style={{
+        //   backgroundImage: `url(../src/assets/backgrounds/landing_page_blob.svg)`,
+        // }}
+        className="bg-no-repeat bg-center bg-cover bg-gradient-to-r from-0 from-black via-50% via-[#05060B] to-100 to-[#11284B] pt-[100px]"
       >
         <CookieConsent /> {}
-        <section className="min-h-screen">
+        <section className="min-h-screen mb-32">
           <Welcome />
         </section>
+        <section className="flex items-center justify-center lg:mx-16 mb-60">
+          <RecentlyAdded />
+        </section>
         <section className="flex flex-col justify-center items-center">
-          <div className="flex w-[90%] h-20  bg-gradient-border rounded-2xl mb-32 -translate-y-1/2 text-white">
-            <h1 className="m-auto">SOME TEXT VI KAN HA HÄR; NÅGOT COOLT</h1>
-          </div>
           <TodaysQuest
             textPrompt="HEJSAN"
             imageUrl="src/assets/images/cards/the_legend_of_zelda_breath_of_the_wild_4k-wide-1332745958.jpg"
             quizName="Todays Mixed Quiz"
             quiz={todaysMixedQuiz}
           />
-        </section>
-        <section className="flex items-center justify-center lg:mx-16">
-          <RecentlyAdded />
         </section>
         <section
           id="games"

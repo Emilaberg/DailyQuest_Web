@@ -24,7 +24,7 @@ export default function BrowseGamesPage() {
 
   return (
     <>
-      <div className="bg-[url(../src/assets/backgrounds/landing_page_blob.svg)] bg-no-repeat bg-center bg-cover">
+      <div className="bg-gradient-to-br from-0 from-[#05060B] to-100 to-[#11284B] pt-[100px] pb-60">
         <section>
           <BannerComponent
             title={"Browse games"}

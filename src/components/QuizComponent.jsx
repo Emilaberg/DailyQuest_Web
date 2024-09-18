@@ -61,6 +61,7 @@ function QuizComponent({ quizQuestions, questionTitle }) {
 
     // console.log("load next question");
     // console.log(answeredQuestions);
+    updateProgressBar();
   }, [index]);
 
   function shuffleAnswers() {
@@ -145,6 +146,7 @@ function QuizComponent({ quizQuestions, questionTitle }) {
     //logik för att ladda nästa fråga
     if (index - 1 < 0) {
       console.log("yes");
+      updateProgressBar();
       return;
     }
 
@@ -158,6 +160,7 @@ function QuizComponent({ quizQuestions, questionTitle }) {
   function loadNextQuestion() {
     if (index + 1 == allQuestions.length) {
       console.log("yes");
+      updateProgressBar();
       return;
     }
     setAnsweredCorrect(false);
@@ -238,13 +241,39 @@ function QuizComponent({ quizQuestions, questionTitle }) {
     return true;
   }
 
+  const [progressBarPercentage, setProgressBarPercentage] = useState(0);
+  function updateProgressBar() {
+    if (index + 1 == allQuestions.length) {
+      console.log("he");
+      setProgressBarPercentage(100);
+    } else {
+      console.log(index);
+      const progressPercentage = (index / allQuestions.length) * 100;
+      console.log(progressPercentage);
+      setProgressBarPercentage(Math.floor(progressPercentage));
+    }
+  }
+
   return (
     <div className="flex flex-col items-center justify-center">
-      <span className="text-white">
-        {index + 1} / {allQuestions.length}
+      <span className="text-white flex flex-col items-center pb-2">
+        <span>answered</span> {answeredQuestions.length} / {allQuestions.length}
       </span>
+      <div className="w-1/2">
+        <div
+          id="progress-container"
+          className="w-full bg-gray-200 rounded-full h-4"
+        >
+          <div
+            id="progress-bar"
+            className={`bg-blue-600 h-4 rounded-full transition-all ease-linear duration-100`}
+            style={{ width: `${progressBarPercentage}%` }}
+          ></div>
+        </div>
+      </div>
+
       {/* quiz container */}
-      <div className="relative w-full px-5 md:w-4/6 lg:w-3/5 xl:w-1/2 md:px-0 mt-20 ">
+      <div className="relative w-full px-5 md:w-4/6 lg:w-3/5 xl:w-1/2 md:px-0 mt-10">
         <div className="min-w-full min-h-80 h-[400px] w-full bg-blue-900 bg-opacity-30">
           <img
             className="relative z-10 object-contain w-full max-h-full"

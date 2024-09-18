@@ -15,7 +15,7 @@ export async function action() {
 export default function ErrorPage() {
   return (
     <>
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-gradient-to-br from-0 from-[#05060B] to-100 to-[#11284B] pt-[100px]">
         <h1 className="text-white">
           Sadly it seems like our server is down at the moment, please check
           back later...

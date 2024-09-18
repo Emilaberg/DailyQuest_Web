@@ -55,7 +55,7 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative bg-gradient-to-br from-0 from-[#05060B] to-100 to-[#11284B]">
       {/* Conditionally render the overlay if not logged in */}
       {!isLoggedIn && (
         <div className="absolute top-0 left-0 w-full h-full z-50">

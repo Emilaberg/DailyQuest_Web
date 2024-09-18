@@ -17,12 +17,7 @@ function PlayedQuizzesPage() {
   console.log(storedResults);
   return (
     <>
-      <section
-        className="w-full min-h-screen bg-no-repeat bg-center bg-cover pb-32"
-        style={{
-          backgroundImage: `url(../src/assets/backgrounds/landing_page_blob.svg)`,
-        }}
-      >
+      <section className="w-full min-h-screen bg-gradient-to-br from-0 from-[#05060B] to-100 to-[#11284B] pb-32 pt-[100px]">
         <BannerComponent
           title="My Played Quizzes"
           imageUrl="../src/assets/images/browseBannerMixGames.png"
