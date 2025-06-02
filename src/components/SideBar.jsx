@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import dashboard from "../assets/icons/dashboard.svg";
 import plusSolid from "../assets/icons/plus-solid 1.svg";
 import mail from "../assets/icons/mail.svg";
@@ -56,17 +56,17 @@ function SideBar({ isOpen }) {
             </Link>
           </li>
           <li className="mb-2 flex items-center ml-3 mt-6">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="hover:text-gray-300 flex items-center"
             >
               <img
                 src={logout}
-                alt="Logout"
+                alt="Log out"
                 className="w-7 h-7 mr-2"
               />
               Logout
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

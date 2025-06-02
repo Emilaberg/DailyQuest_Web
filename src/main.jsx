@@ -20,6 +20,7 @@ import AdminLoginOverlay from "./components/AdminLoginOverlay.jsx";
 import FaqPage from "./pages/FaqPage.jsx";
 import ReportForm from "./routes/ReportForm.jsx";
 import Faqs from "./routes/faqs.jsx";
+import PlayedQuizzesPage from "./pages/PlayedQuizzesPage.jsx";
 
 //actions
 import { action as reportAction } from "./routes/ReportForm.jsx";
@@ -27,11 +28,14 @@ import { action as reportAction } from "./routes/ReportForm.jsx";
 import { loader as adminLoader } from "./routes/rootAdmin.jsx";
 import { loader as homePageLoader } from "./pages/HomePage.jsx";
 import { loader as gamePageLoader } from "./pages/GamePage.jsx";
+import { loader as browseGamesPageLoader } from "./pages/BrowseGamesPage.jsx";
+import { loader as playedQuizzesPageLoader } from "./pages/PlayedQuizzesPage.jsx";
 
 import TrackedEmails from "./components/TrackedEmails.jsx";
 import AvailableQuizzes from "./components/AvailableQuizzes.jsx";
 import AddQuiz from "./components/AddQuiz.jsx";
 import AdminStatistics from "./components/AdminStatistics.jsx";
+import BrowseGamesPage from "./pages/BrowseGamesPage.jsx";
 
 const router = createBrowserRouter([
   //routes för gamepage
@@ -68,6 +72,16 @@ const router = createBrowserRouter([
               },
             ],
           },
+          {
+            path: "browse-games",
+            element: <BrowseGamesPage />,
+            loader: browseGamesPageLoader,
+          },
+          {
+            path: "played-quizzes",
+            element: <PlayedQuizzesPage />,
+            loader: playedQuizzesPageLoader,
+          },
         ],
       },
     ],
@@ -79,15 +93,6 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     loader: adminLoader,
     children: [
-      {
-        index: true,
-        element: (
-          <Navigate
-            to="dashboard/admin-statistics"
-            replace
-          />
-        ),
-      },
       {
         path: "dashboard",
         element: <AdminPage />,

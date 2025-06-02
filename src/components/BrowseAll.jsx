@@ -1,26 +1,31 @@
+// Imports
 import GameCard from "./GameCard";
 import ApiService from "../hooks/apiService";
 import { useState, useEffect } from "react";
 
-function BrowseAll() {
+function BrowseAll({ limit }) {
+  // States
   const apiService = ApiService();
   const [quizzes, setQuizzes] = useState([]);
   const [searchWord, setSearchWord] = useState("");
   const [fetchError, setFetchError] = useState(null);
-
+  // Use-effects
   useEffect(() => {
     async function fetchQuizzes() {
       try {
         const response = await apiService.getAllQuiz();
 
         if (response.data.$values && response.data.$values.length > 0) {
-          setQuizzes(response.data.$values);
+          const quizData = limit
+            ? response.data.$values.slice(0, limit)
+            : response.data.$values;
+          setQuizzes(quizData);
           setFetchError(null);
         } else {
-          setFetchError("No quizzes found");
+          setFetchError("fetch failed");
         }
       } catch (error) {
-        setFetchError("Something went wrong!");
+        setFetchError(response.data.message);
         // console.log(response.message);
         console.error("Error fetching all quiz", error);
       }
@@ -31,7 +36,7 @@ function BrowseAll() {
   const filterBrowser = quizzes.filter((quiz) =>
     quiz.quizName.toLowerCase().includes(searchWord.toLowerCase())
   );
-
+  // Elements
   return (
     <>
       <div
@@ -67,11 +72,11 @@ function BrowseAll() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2  md:grid-cols-3 xl:gap-6">
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-3 xl:gap-6">
             {/* Error message if tags are empty */}
             {fetchError && (
               <div className="text-white font-bold text-xl col-span-full pt-10">
-                Failed to fetch quiz. Please try again later.
+                {fetchError}
               </div>
             )}
             {!fetchError &&

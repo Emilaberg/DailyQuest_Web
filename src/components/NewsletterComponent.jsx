@@ -1,7 +1,9 @@
+// Imports
 import ReactDom from "react-dom";
 import { useState, useEffect } from "react";
 
 function Newsletter({ open, onClose }) {
+  // States
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,6 +18,8 @@ function Newsletter({ open, onClose }) {
     setSuccess(null);
 
     const dateLastSent = new Date().toISOString(); // Changes date to ISO format (2024-09-06T14:48:00.000Z)
+
+    // API call
     try {
       const response = await fetch("https://localhost:7174/api/Email/wombat", {
         method: "POST",
@@ -40,6 +44,7 @@ function Newsletter({ open, onClose }) {
     }
   };
 
+  // Use-effects
   useEffect(() => {
     if (!open) {
       setSuccess(null);
@@ -47,6 +52,7 @@ function Newsletter({ open, onClose }) {
   }, [open]);
 
   if (!open) return null;
+  // Elements
   return ReactDom.createPortal(
     <>
       <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/70 z-1000">

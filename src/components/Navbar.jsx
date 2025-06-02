@@ -9,7 +9,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="w-full h-28 bg-[#22195E] flex items-center justify-between pr-[81px] pl-[26px]">
+      <nav className="fixed z-50 shadow-sm shadow-[#001EFF] w-full h-28 bg-gradient-to-r from-0 from-[#05060B] to-100 to-[#11284B] flex items-center justify-between pr-[81px] pl-[26px]">
         <Link
           className="mr-auto"
           to="/"

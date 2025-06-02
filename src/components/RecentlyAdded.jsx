@@ -16,10 +16,10 @@ function RecentlyAdded() {
           setQuizzes(response.data.$values.slice(-3));
           setFetchError(null);
         } else {
-          setFetchError("No quiz found");
+          setFetchError("Fetch error, no quiz found!");
         }
       } catch (error) {
-        setFetchError("Something went wrong!");
+        setFetchError(response.data.message);
         console.error("Error fetching all quiz", error);
       }
     }
@@ -50,15 +50,12 @@ function RecentlyAdded() {
         <div className=" flex flex-row justify-between md:gap-4 lg:gap-10 xl:gap-16 ">
           {fetchError && (
             <div className="text-white font-bold text-xl col-span-full pt-10">
-              Failed to fetch. Please try again later.
+              {fetchError}
             </div>
           )}
           {!fetchError &&
             quizzes.map((quiz, index) => (
-              <GradiantButton
-                buttonText={quiz.quizName}
-                key={index}
-              />
+              <GradiantButton buttonText={quiz.quizName} key={index} />
             ))}
         </div>
       </div>

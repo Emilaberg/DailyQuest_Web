@@ -7,7 +7,7 @@ function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
 
   let styles = isValid
     ? `relative flex justify-center items-center w-full h-[384px] bg-cover bg-center mb-32 bg-[url(${imageUrl})]`
-    : "relative flex justify-center items-center w-full h-[384px] bg-cover bg-center mb-32 url(../src/assets/images/mystery-box-with-gifts-concept.jpg)";
+    : "relative flex justify-center items-center w-full h-[384px] bg-cover bg-center mb-32 bg-[url(../src/assets/images/mystery-box-with-gifts-concept.jpg)]";
 
   useEffect(() => {
     if (imageUrl == undefined) {
@@ -18,12 +18,25 @@ function BannerComponent({ title, imageUrl, buttonText, to, attribute }) {
       });
     }
   }, []);
-  console.log(typeof imageUrl);
   return (
     <>
-      <section className={styles}>
-        <div className="flex flex-col items-center">
-          <h1 className="z-20 font-bold text-center text-lightSlateGray text-8xl mb-10">
+      <section
+        style={{
+          backgroundImage: `url(${
+            imageUrl
+              ? imageUrl
+              : "../src/assets/images/mystery-box-with-gifts-concept.jpg"
+          })`,
+        }}
+        className={
+          "relative flex justify-center items-center w-full h-[384px] bg-cover bg-center mb-32 "
+        }
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+
+        <div className=" relative flex flex-col items-center z-10">
+          <h1 className="font-bold text-center text-lightSlateGray text-8xl mb-10 uppercase">
             {title}
           </h1>
           {buttonText ? (
